@@ -1,5 +1,7 @@
 appbase.service('consultaTramiteService', function($http, $rootScope) {
 	return {
+
+		
 		
 	}
 });
