@@ -1,0 +1,138 @@
+<div growl></div>
+<div class="panel panel-default">
+<div class="panel-heading"><h5 align="center">SEGUIMIENTO DE REPRESENTANTES DEL MP EN COMISIONES</h5></div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h3 class="widget-title"><span class="label label-default">Datos Generales</span></h3>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Documento</label> 
+							<select style="height: 30px;" class="form-control"  ng-model="cDatos.tipoResolucion.selectedOption" ng-options="item.caDesc for item in tipoResolucion.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label for="inputSuccess" >Nro Resoluci&oacuten</label> 
+							<input type="text" class="form-control input-sm" ng-model="cDatos.nroResolucion"/>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>C&oacutedigo Barra</label> 
+							<input type="text" class="form-control input-sm" ng-model="cDatos.cbarra"  />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado Resoluci&oacuten</label> 
+							<select style="height: 30px;" class="form-control"  ng-model="cDatos.tipoResolucion.selectedOption" ng-options="item.caDesc for item in tipoResolucion.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Comision</label> 
+							<select style="height: 30px;" class="form-control"  ng-model="cDatos.origen.selectedOption" ng-options="item.caDesc for item in origen.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado Representante</label> 
+							<select style="height: 30px;" class="form-control"  ng-model="cDatos.origen.selectedOption" ng-options="item.caDesc for item in origen.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Inicio</label> 
+							<div class="input-group">
+							<input type="text" class="form-control input-sm" datepicker-popup="{{consulta.format}}" ng-model="consulta.fFin" is-open="consulta.calendarioAbierto2" datepicker-options="consulta.dateOptions" ng-required="true" close-text="Cerrar" readonly />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="consulta.abrirCalendario2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+							</div>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Fin</label> 
+							<div class="input-group">
+							<input type="text" class="form-control input-sm" datepicker-popup="{{consulta.format}}" ng-model="consulta.fFin" is-open="consulta.calendarioAbierto2" datepicker-options="consulta.dateOptions" ng-required="true" close-text="Cerrar" readonly />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="consulta.abrirCalendario2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Distrito Fiscal</label> 
+							<select style="height: 30px;" class="form-control" name="idRepresentante" ng-model="consulta.repre" ng-options="item.id  as item.name for item in representanteSG" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Representante</label> 
+							<select style="height: 30px;" class="form-control" name="idFuncionario" ng-model="consulta.fiscal" ng-options="item.id  as item.name for item in representanteSG" required>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Responsable</label> 
+							<select style="height: 30px;" class="form-control" name="idRepresentante" ng-model="consulta.repre" ng-options="item.id  as item.name for item in representanteSG" required>
+							</select>
+						</div>
+					</div>
+					<div class="row" >
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 col-md-offset-5" >
+							<label></label> 
+							<button class="btn btn-primary btn-md form-control" ng-click="consulta.consultaResoluciones()"><span class="glyphicon glyphicon-search"></span>Consultar</button>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="col-md-12">
+		<ul class="list-group" >
+			<li class="list-group-item  bloque-titulo">
+				<div class="pull-left"><h4>Representantes</h4></div>
+				<div class="clearfix"></div> 
+			</li>
+			<li class="list-group-item">
+				<table id="registrosINPE"  class="table table-condensed table-hover table-responsive" style="font-size:12px;cursor:pointer;">
+					<thead>
+						<tr>
+							<th>Tipo Documento</th>
+							<th>Nro. Resol.</th>
+							<th>Fecha Documento</th>
+							<th>Representante</th>
+							<th>Entregable</th>
+							<th>Plazo Entregable</th>
+							<th>Cumplimiento</th>
+							<th>Cod Barra</th>
+							<th>Fecha Cod Barra</th>
+							<th>Observaciones</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>15564654</td>
+						<td>10-01-17</td>
+						<td>Viaje Exterior</td>
+						<td>SG</td>
+						<td>OF56456654</td>
+						<td>5465465</td>
+						<td>Pendiente</td>
+					</tr>
+					<!--<tr ng-class="{'selected':$index == selectedRowINPE}" ng-repeat="item2 in lstRegistrosInpeXPj"   ng-click="setearClicFilaINPE($index)"  ng-dblclick="" >  
+							 <td> {{ $index + 1 }}</td> 
+							<td>{{item2.iprId}}</td>
+							<td>{{item2.iprNroExp}}</td>
+							<td>{{item2.iprFechaIng}}</td> 
+							<td><button ng-click="actualizarRegistroINPE(item2.iprId,item2)"  class="btn btn-primary btn-xs">Actualizar</button>
+								<button ng-click="eliminarRegistroINPE(item2.iprId,item2)"  class="btn btn-danger btn-xs">Eliminar</button>
+							</td>
+						</tr>  -->
+						
+					</tbody>
+				</table>
+			</li>
+		</ul>
+	</div>
+</div>
+
+

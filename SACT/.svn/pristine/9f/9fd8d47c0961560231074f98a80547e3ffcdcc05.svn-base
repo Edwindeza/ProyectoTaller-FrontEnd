@@ -1,0 +1,20 @@
+appbase.controller('loginCtrl', function( $http, $modal, $log, $rootScope){
+		var entorno=this;
+		
+		this.nuevoModal = function () {
+    		var modalInstance = $modal.open({
+      			animation: true,
+      			templateUrl: 'beneficiariosModal.html',
+      			controller: 'beneficiariosModalCtrl',
+      			controllerAs: 'beneficiariosModal',
+      			size: 'lg',
+      			
+    		});
+  		};
+		
+	});
+
+
+appbase.controller('beneficiariosModalCtrl', function ( $scope, $modalInstance) {
+
+});

@@ -1,0 +1,235 @@
+	appbase.service('viajeService', function($http, $rootScope){
+		return{
+			
+		}
+	});
+	
+	appbase.controller('viajeCtrl',function(viajeService,$http, $modal, $rootScope,$scope) {
+		var entorno=this;
+		var entorno3=$scope;
+
+		$rootScope.viajeReg={
+				tOrigen:"",
+				tResolucion:"",
+				fFirma:"",
+				fPublicacion:"",
+				nroResolucion:"",
+				fCreacion:"",
+				cBarra:"",
+				fcBarra:"",
+				nroOficio:"",
+				sumilla:"",
+				evento:"",
+				tEvento:"",
+				Responsable:"",
+				ciudad:"",
+				pais:"",
+				continente:"",
+				tTransporte:"",
+				fInicio:"",
+				fFin:"",
+				dias:""
+			};
+		
+		$rootScope.viajeReg.eResolucion={
+				id:"1",
+				nombre:"Proyecto"
+		};
+		
+		/**
+		 * Calculo de Dias de Estancia de Representante
+		 */
+		$scope.mostrarEstancia=function(){
+			$scope.inicio = new Date($rootScope.viajeReg.fInicio);
+			$scope.fin = new Date($rootScope.viajeReg.fFin);
+			$scope.diferencia= $scope.fin-$scope.inicio;
+//			var hoy = new Date($rootScope.viajeReg.fInicio);
+//			dia = hoy.getDay();
+//			mes = ((hoy.getMonth() + 1) < 10 ? '0' : '') + (hoy.getMonth() + 1);
+//			anio= hoy.getFullYear();
+//			totaldias=dia+mes*30+anio*365;
+//			var naci=new Date($rootScope.viajeReg.fFin);
+//			diaNaci = naci.getDay();
+//			mesNaci = naci.getMonth();
+//			anioNaci= naci.getFullYear();
+//			totalMesNaci=diaNaci+mesNaci*30+anioNaci*365;
+//			var totalDias=(totalMesNaci-totaldias);
+//			$rootScope.viajeReg.dias=totalDias+1;
+			$rootScope.viajeReg.dias=$scope.diferencia;
+		}
+		//fin
+		
+		/**
+		 * fecha actual formato dd/mm/yy
+		 */
+		var factual=new Date();
+		fdia=factual.getDate();
+		fmes=((factual.getMonth() + 1) < 10 ? '0' : '') + (factual.getMonth() + 1);
+		faño=factual.getFullYear();
+		var totalfecha=fdia+"/"+fmes+"/"+faño;
+		$rootScope.viajeReg.fcreacion=totalfecha;
+		//fin
+		
+		/**
+		 * Calculo automatico de nro Resolucion
+		 */
+		var total=fdia+"-"+faño+"-MP-FN";
+		$rootScope.viajeReg.nroResolucion=total;
+		//fin
+		
+  	    /**
+  	     * Inicio Calendario
+  	     */
+		entorno.calendarioAbierto = false;
+		entorno.calendarioAbierto2 = false;
+		entorno.calendarioAbierto3 = false;
+		entorno.calendarioAbierto4 = false;
+		entorno.calendarioAbierto5 = false;
+		entorno.calendarioAbierto6 = false;
+
+		entorno.formats = ['dd/MM/yyyy','dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		entorno.format = entorno.formats[0];
+
+		this.abrirCalendario = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto = true;
+  		};
+
+  		this.abrirCalendario2 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto2 = true;
+  		};
+  		
+  		this.abrirCalendario3 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto3 = true;
+  		};
+  		
+  		this.abrirCalendario4 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto4 = true;
+  		};
+  		
+  		this.abrirCalendario5 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto5 = true;
+  		};
+  		
+  		this.abrirCalendario6 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto6 = true;
+  		};
+  		
+  		entorno.dateOptions = {
+    		formatYear: 'yyyy',
+    		startingDay: 1
+  		};
+  		//fin Calendario
+  		
+  		this.abriModalComisionado=function(){
+  			var modalInstance =  $modal.open({
+      			animation: true,
+      			templateUrl: 'modalComisionado.html',
+      			controller: 'comisionadoModalCtrl',
+      			controllerAs: 'comisionado',
+      			size: 'lg',	
+      			resolve: {}
+    		});
+  		};
+  		
+  		$rootScope.mantenedor={
+  				codigoBarra:""
+  		}
+  		
+  		$rootScope.listaCodigoBarra = {
+			    availableOptions: [{
+			    	NCodbarras:"", 
+			    	CDescSumilla:"",
+			    	CNumeroDocumento:"", 
+			    	DFechaDocumento:""}]
+			    };
+  		
+  		this.myFunct = function(keyEvent,mantenedor) {
+  			var nuevoParametro = {cbarra : mantenedor.cbarra};
+  			$http.get("http://localhost:8080/demoseguridadbackend/resources/mantenedor/DEX1600143772").then(function(response){
+  				$rootScope.listaCodigoBarra.availableOptions = response.data;
+  				console.log($rootScope.listaCodigoBarra);
+  			}, function(response){
+  				alert("error: "+response.data);
+  			});
+  		}
+
+  		
+		
+	});
+	
+	appbase.controller('comisionadoModalCtrl',function ($modalInstance,$modal, $rootScope,$scope) {
+		var entorno2 = $scope;
+		
+		/**
+		 * Agregar comisionado
+		 */
+		$scope.lstDelitos = [{
+			id: "", 
+			nombre:"",
+			paterno:"",
+			materno:"", 
+			distrito:"", 
+			goce:"", 
+			irroga:"", 
+			pasaje:"", 
+			seguro:"",
+			viatico:"",
+			traslado:"",
+			otro:"",
+			total:""
+				}];
+		
+		$scope.agregarDelitos = function(coMantenedor) {
+				  var nuevoDel = { 
+						  nombre:coMantenedor.coNombre,
+						  paterno:coMantenedor.coPaterno,
+						  distrio:coMantenedor.coDistrito,
+						  goce:coMantenedor.coGoce,
+						  irroga:coMantenedor.coIrroga,
+						  pasaje:coMantenedor.coPasaje,
+						  seguro:coMantenedor.coSeguro,
+						  viatico:coMantenedor.coViatico,
+						  traslado:coMantenedor.coTraslado,
+						  otro:coMantenedor.coOtro};
+				  $scope.lstDelitos.push(nuevoDel);
+				  
+				  $scope.errorDelito = false;
+			};
+			
+		$scope.deleteDelito = function(lstDelitos,item) {
+				lstDelitos.splice(lstDelitos.indexOf(item), 1);
+			};
+			
+		entorno2.cerrarModal = function () {
+				console.log("cerrar modal actualizar");
+				$rootScope.modalInstance.close('cerrar');
+			};
+			
+	});
+	
+	appbase.directive('myEnter', function () {
+	    return function (scope, element, attrs) {
+	        element.bind("keydown keypress", function (event) {
+	            if(event.which === 13) {
+	                scope.$apply(function (){
+	                    scope.$eval(attrs.myEnter);
+	                });
+
+	                event.preventDefault();
+	            }
+	        });
+	    };
+	});
+	

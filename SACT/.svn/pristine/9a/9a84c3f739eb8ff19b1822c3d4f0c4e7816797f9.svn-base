@@ -1,0 +1,261 @@
+<div growl></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h5 align="center">CREACION DE RESOLUCION DE REPRESENTANTES DEL MP</h5>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h3 class="widget-title"><span class="label label-default">Datos Generales</span></h3>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Origen</label> 
+							<select style="height: 30px;" class="form-control" name="idOrigen" ng-model="origen.selectedOption" ng-options="item.name for item in origen.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Resoluci&oacuten</label> 
+							<input type="text" class="form-control input-sm" ng-model="repreRegistro.tipo" value="Representantes del MP" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Documento</label> 
+							<select style="height: 30px;" class="form-control" name="idEstado" ng-model="estadoResolucion.selectedOption" ng-options="item.name for item in estadoResolucion.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3 ">
+							<label>Fecha Firma</label> 
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" datepicker-popup="{{repre.format}}" ng-model="repre.fechaFirma" is-open="repre.calendarioAbierto" datepicker-options="repre.dateOptions" ng-required="true" close-text="Cerrar" readonly />
+                                 <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default btn-sm" ng-click="repre.abrirCalendario($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                 </span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Nro Resoluci&oacuten</label> 
+							<input type="text" class="form-control input-sm" id="deFnaci"  ng-model="repreRegistro.nro" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Creaci&oacuten</label> 
+							<input type="text" class="form-control input-sm" id="repreFecha" ng-model="repreRegistro.fcreacion" readonly/>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado Resoluci&oacuten</label> 
+							<select style="height: 30px;" class="form-control" name="idEstado" ng-model="estadoResolucion.selectedOption" ng-options="item.name for item in estadoResolucion.availableOptions track by item.id" required>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>C&oacutedigo Barra</label> <input type="date"
+								class="form-control input-sm" id="deFnaci"
+								value="detMantenedor.deFnaci" ng-model="detMantenedor.deFnaci" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Documento</label> <input type="text"
+								class="form-control input-sm" id="deEdad" ng-model="detMantenedor.deEdad" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Nro Oficio</label> <input type="text"
+								class="form-control input-sm" id="deEdad" ng-model="detMantenedor.deEdad" readonly />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Sumilla</label> <input type="date"
+								class="form-control input-sm" id="deFnaci"
+								value="detMantenedor.deFnaci" ng-model="detMantenedor.deFnaci" readonly  />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Responsable SG</label> <select style="height: 30px;"
+								class="form-control" name="deDatos"
+								ng-model="detMantenedor.deDatos"
+								ng-options="item.id  as item.name for item in datos" required>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+		<ul class="list-group" >
+			<li class="list-group-item  bloque-titulo">
+				<h3 class="widget-title pull-left"><span class="label label-default"> Datos de Comisi&oacuten</span></h3>
+				<div class="form-group col-xs-9 col-sm-6 col-md-2 pull-right">
+				<button class="btn btn-primary btn-md form-control" ng-click="repre.abriModalComision()"><span class="glyphicon glyphicon-plus"></span>Agregar</button>	
+							
+				</div>
+				<div class="clearfix"></div> 
+			</li>
+			<li class="list-group-item ">
+				<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Comisi&oacuten</label> 
+							<select class="form-control" name="idOrigen" ng-model="tipoComision.selectedOption" ng-options="item.name for item in tipoComision.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Sub Tipo</label> 
+							<select  class="form-control" name="idOrigen" ng-model="SubtipoComision.selectedOption" ng-options="item.name for item in SubtipoComision.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Designacion</label> 
+							<div class="input-group">
+									<input type="text" class="form-control input-sm" datepicker-popup="{{comision.format}}" ng-model="coMantenedor.fecha" is-open="comision.calendarioAbierto" datepicker-options="comision.dateOptions" ng-required="true" close-text="Cerrar" readonly />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="comision.abrirCalendario($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label>Nombre Comisi&oacuten</label> 
+							<input type="text" class="form-control input-sm" ng-model="coMantenedor.nombre" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label>Objeto</label> 
+							<input type="text" class="form-control input-sm" id="coSeguro" ng-model="coMantenedor.objeto"  />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Plazo (Dias)</label> <input type="date"
+								class="form-control input-sm" id="deFnaci" ng-model="coMantenedor.plazo" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Car&aacutecter</label> 
+							<select class="form-control" name="idOrigen" ng-model="caracter.selectedOption" ng-options="item.name for item in caracter.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Intitucion</label> 
+							<select class="form-control" name="idOrigen" ng-model="institucion.selectedOption" ng-options="item.name for item in institucion.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Sistema</label> 
+							<select class="form-control" name="idOrigen" ng-model="sistema.selectedOption" ng-options="item.name for item in sistema.availableOptions track by item.id" required>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Materia</label> 
+							<select class="form-control" name="idOrigen" ng-model="materia.selectedOption" ng-options="item.name for item in materia.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Sub Materia</label> 
+							<select class="form-control" name="idOrigen" ng-model="subsistema.selectedOption" ng-options="item.name for item in subsistema.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Ambito Institucion</label> 
+							<select class="form-control" name="idOrigen" ng-model="ambitoInstitucional.selectedOption" ng-options="item.name for item in ambitoInstitucional.availableOptions track by item.id" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Ambito Juridiccional</label> 
+							<select class="form-control" name="idOrigen" ng-model="ambitoJuridiccional.selectedOption" ng-options="item.name for item in ambitoJuridiccional.availableOptions track by item.id" required>
+							</select>
+						</div>
+					</div>
+			</li>
+			<li class="list-group-item">
+				<table id="registrosINPE"  class="table table-condensed table-hover table-responsive" style="font-size:12px;cursor:pointer;">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Tipo Comision</th>
+							<th>Sub tipo</th>
+							<th>Nombre Comision</th>
+							<th>Objeto</th>
+							<th>Fecha Designacion</th>
+							<th>Plazo</th>
+							<th>Caracter</th>
+							<th>Institucion</th>
+							<th>Sistema</th>
+							<th>Materia</th>
+							<th>Sub Materia</th>
+							<th>Ambito Institucional</th>
+							<th>Ambito Juridiccional</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>1</td>
+						<td>Comision de Trabajo</td>
+						<td>Conformacion</td>
+						<td>Revisión y Actualización de Gestión Fiscal</td>
+						<td>Comisión de Revisión y Actualización de Gestión Fiscal y elaboración del Reglamento de dicho sistema.</td>
+						<td>08/08/2016</td>
+						<td>90</td>
+						<td>Temporal</td>
+						<td>Ministerio Publico</td>
+						<td>Fiscal</td>
+						<td>Penal</td>
+						<td>Tributario</td>
+						<td>Interno</td>
+						<td>Nacional</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Comision de Trabajo</td>
+						<td>Conformacion</td>
+						<td>Evaluacion de  problemática de Peritos del Ministerio Publuco</td>
+						<td>Comisión para evaluar la problemática existente respecto a los peritos del Ministerio Publico</td>
+						<td>15/08/2016</td>
+						<td>120</td>
+						<td>Temporal</td>
+						<td>Ministerio Publico</td>
+						<td>Fiscal</td>
+						<td>Penal</td>
+						<td>Tributario</td>
+						<td>Interno</td>
+						<td>Nacional</td>
+					</tr>
+					<!--<tr ng-class="{'selected':$index == selectedRowINPE}" ng-repeat="item2 in lstRegistrosInpeXPj"   ng-click="setearClicFilaINPE($index)"  ng-dblclick="" >  
+							 <td> {{ $index + 1 }}</td> 
+							<td>{{item2.iprId}}</td>
+							<td>{{item2.iprNroExp}}</td>
+							<td>{{item2.iprFechaIng}}</td> 
+							<td><button ng-click="actualizarRegistroINPE(item2.iprId,item2)"  class="btn btn-primary btn-xs">Actualizar</button>
+								<button ng-click="eliminarRegistroINPE(item2.iprId,item2)"  class="btn btn-danger btn-xs">Eliminar</button>
+							</td>
+						</tr>  -->
+						
+					</tbody>
+				</table>
+			</li>
+		</ul>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+							<button class="btn btn-danger btn-md form-control" ng-click="abriModalComision()"><span class="glyphicon glyphicon-saved"></span>Guardar</button>	
+						</div>
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-left">
+							<button class="btn btn-success btn-md form-control" ng-click="viaje.regresar()"><span class="glyphicon glyphicon-log-out"></span>Regresar</button>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="modalComision.html">
+	<div class="include" ng-include="'vistas/resoluciones/representante/modalComision.html'">
+	</div>
+</script>

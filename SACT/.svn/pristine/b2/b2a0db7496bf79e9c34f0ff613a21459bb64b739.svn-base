@@ -1,0 +1,168 @@
+<div growl></div>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h5>PROPUESTAS DE DESIGNACION DE
+			FISCALES/FUNCIONARIOS</h5>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Numero Propuesta</label> <input type="text"
+								class="form-control input-sm" id="viajeNumero"
+								ng-model="viajeReg.nroResolucion" placeholder="2" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo de Propuesta</label> <select style="height: 24px;"
+								class="form-control" name="idTipo"
+								ng-model="tipoPropuesta.selectedOption"
+								ng-options="item.caDesc for item in tipoPropuesta.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado de la Propuesta</label> <select
+								style="height: 24px;" class="form-control" name="idTipo"
+								ng-model="estadoPropuesta.selectedOption"
+								ng-options="item.caDesc for item in estadoPropuesta.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Distrito Fiscal</label> <select style="height: 24px;"
+								class="form-control" name="idTipo"
+								ng-model="listaDistritoFiscal.selectedOption"
+								ng-options="item.descDijuDju for item in listaDistritoFiscal.availableOptions track by item.descDijuDju" />
+							</select>
+						</div>
+					</div>
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>C&oacutedigo Barra</label> <input type="text"
+								class="form-control input-sm" ng-model="cDatos.cddbarra"
+								placeholder="DEX16-128743" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Numero Documento</label> <input type="text"
+								class="form-control input-sm" ng-model="cDatos.nroOficio"
+								readonly placeholder="2806-2016-MP-PJFS-AMAZONAS" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Documento</label> <input type="text"
+								class="form-control input-sm" ng-model="cDatos.nroOficio"
+								readonly placeholder="27-10-2016" />
+						</div>
+					</div>
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label>Sumilla</label> <input type="text"
+								class="form-control input-sm" ng-model="cDatos.nroOficio"
+								readonly />
+						</div>
+					</div>
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label>Observaci&oacuten</label> <input type="text"
+								class="form-control input-sm" ng-model="cDatos.nroOficio" />
+						</div>
+					</div>
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label></label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<ul class="list-group">
+				<li class="list-group-item disabled  bloque-titulo">
+					<div class="pull-left">
+						<h4>Fiscales/Funcionarios</h4>
+					</div>
+					<div class="form-group col-xs-9 col-sm-6 col-md-2 pull-right">
+						<button class="btn btn-primary btn-md form-control"
+							ng-click="viaje.abriModalComisionado()">
+							<span class="glyphicon glyphicon-plus"></span>Agregar
+						</button>
+					</div>
+					<div class="clearfix"></div>
+				</li>
+				<li class="list-group-item">
+					<table id="registrosINPE"
+						class="table table-condensed table-hover table-responsive"
+						style="font-size: 12px; cursor: pointer;">
+						<thead>
+							<tr>
+								<th>Apellido Paterno</th>
+								<th>Apellido Materno</th>
+								<th>Nombres</th>
+								<th>Fiscalia</th>
+								<th>Cargo Propuesto</th>
+								<th>Estado Fiscal</th>
+								<th>Numero Resoluci&oacuten</th>
+								<th>Fecha Resoluci&oacuten</th>
+								<th>Observaci&oacuten</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>PARIENTE</td>
+								<td>VILLEGAS</td>
+								<td>YANETH</td>
+								<td>FISCALIA PROVINCIAL PENAL CORPORATIVA DE BAGUA</td>
+								<td>FISCAL ADJUNTO PROVINCIAL</td>
+								<td>DESIGNADO</td>
+								<td>524</td>
+								<td>02/11/2016</td>
+								<td></td>
+								<td>
+									<button ng-click="designacion.abriModalDesignacion()"
+										class="btn btn-primary btn-xs">Editar</button>
+								</td>
+							</tr>
+							<tr>
+								<td>CRUZ</td>
+								<td>IPANAQUE</td>
+								<td>SHAKESPEARE VOLTAIRE</td>
+								<td>FISCALIA PROVINCIAL PENAL CORPORATIVA DE BAGUA</td>
+								<td>FISCAL ADJUNTO PROVINCIAL</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<button ng-click="designacion.abriModalDesignacion()"
+										class="btn btn-primary btn-xs">Editar</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</li>
+			</ul>
+			<div class="widget-box">
+				<div class="widget-body">
+					<div class="widget-main">
+						<div class="row">
+							<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+								<button class="btn btn-danger btn-md form-control"
+									ng-click="registrarDatos()">
+									<span class="glyphicon glyphicon-saved"></span>Guardar
+								</button>
+							</div>
+							<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-left">
+								<button class="btn btn-success btn-md form-control"
+									ng-click="viaje.regresar()">
+									<span class="glyphicon glyphicon-log-out"></span>Regresar
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

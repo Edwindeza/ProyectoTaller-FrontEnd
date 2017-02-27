@@ -1,0 +1,208 @@
+<div growl></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h5 align="center">CONSULTA DE PROPUESTAS DE DESIGNACION DE
+			FISCALES/FUNCIONARIOS</h5>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo de Propuesta
+								{{cDesignacion.tipoPropuesta.selectedOption.caDetId}}</label> <select
+								style="height: 24px;" class="form-control" name="idTipo"
+								ng-model="cDesignacion.tipoPropuesta.selectedOption"
+								ng-options="item.caDesc for item in cDesignacion.tipoPropuesta.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Distrito Fiscal</label> <select
+								style="height: 24px;" class="form-control" name="idFuncionario"
+								ng-model="cDesignacion.listaDF.selectedOption"
+								ng-options="item.descDijuDju for item in cDesignacion.listaDF.availableOptions track by item.descDijuDju"
+								required>
+							</select>
+
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado Propuesta</label> <select style="height: 24px;"
+								class="form-control" name="idTipo"
+								ng-model="cDesignacion.estadoPropuesta.selectedOption"
+								ng-options="item.caDesc for item in cDesignacion.estadoPropuesta.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Documento Inicio</label>
+							<div class="input-group">
+								<input type="text" class="form-control input-sm"
+									datepicker-popup="{{consultaDesignacion.format}}"
+									ng-model="cDesignacion.fechaInicio"
+									is-open="consultaDesignacion.calendarioAbierto"
+									datepicker-options="consultaDesignacion.dateOptions"
+									ng-required="true" close-text="Cerrar"  /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default btn-sm"
+										ng-click="consultaDesignacion.abrirCalendario($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Numero Documento</label> <input type="text"
+								class="form-control input-sm"
+								ng-model="cDesignacion.numeroDocumento" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>C&oacutedigo Barra</label> <input type="text"
+								class="form-control input-sm"
+								ng-model="cDesignacion.codigoBarra" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fiscal/Funcionario</label> <select style="height: 24px;"
+								class="form-control" name="idRepresentante"
+								ng-model="cDesignacion.fiscales.selectedOption"
+								ng-options="item.nombCortPer for item in cDesignacion.fiscales.availableOptions track by item.nombCortPer"
+								required>
+							</select>
+							<!-- 
+							<label>Buscar: {{listaFiscal.codiEmplPer}}</label> <br> <input type="text"
+								ng-model="search">
+
+							<ul>
+								<li ng-repeat="listaFiscal in listaFiscal | filter:search">
+									{{listaFiscal.codiEmplPer}} - {{listaFiscal.nombCortPer}}- {{listaFiscal.codiCargTca}}</li>
+							</ul> 
+							 -->
+
+						</div>
+
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Documento Fin</label>
+							<div class="input-group">
+								<input type="text" class="form-control input-sm"
+									datepicker-popup="{{consulta.format}}"
+									ng-model="cDesignacion.fechaFin"
+									is-open="consulta.calendarioAbierto2"
+									datepicker-options="consulta.dateOptions" ng-required="true"
+									close-text="Cerrar" /> <span class="input-group-btn">
+									<button type="button" class="btn btn-default btn-sm"
+										ng-click="consulta.abrirCalendario2($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Cargo Propuesto</label> <input type="text"
+								class="form-control input-sm"
+								ng-model="cDesignacion.cargoPropuesto" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Dependencia</label> <select
+								style="height: 24px;" class="form-control"
+								name="idRepresentante"
+								ng-model="cDesignacion.listaDependencia.selectedOption"
+								ng-options="item.descLargTde for item in cDesignacion.listaDependencia.availableOptions track by item.descLargTde"
+								required>
+							</select>
+							<!-- 
+							<select style="height: 30px;"
+								class="form-control" name="idRepresentante"
+								ng-model="listaDependencia.selectedOption"
+								ng-options="item.abreDepeTde for item in listaDependencia.availableOptions track by item.abreDepeTde"
+								required>
+							</select>
+							 -->
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 col-md-offset-5">
+							<label></label>
+							<button class="btn btn-primary btn-md form-control"
+								ng-click="consultaDesignacion.consultaPropuesta()">
+								<span class="glyphicon glyphicon-search"></span>Consultar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<ul class="list-group">
+			<li class="list-group-item-info  bloque-titulo">
+				<div class="pull-left">
+					<h4>Propuestas</h4>
+				</div>
+				<div class="clearfix"></div>
+			</li>
+			<li class="list-group-item">
+				<table id="registrosINPE"
+					class="table table-condensed table-hover table-responsive"
+					style="font-size: 12px; cursor: pointer;">
+					<thead>
+						<tr>
+							<th>Nro Propuesta</th>
+							<th>Distrito Fiscal</th>
+							<th>Estado Propuesta</th>
+							<th>Numero Documento</th>
+							<th>Fecha Documento</th>
+							<th>C&oacutedigo Barra</th>
+							<th>Observaci&oacuten</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in listaDesignacion">
+							<td>{{item.pdId}}</td>
+							<td ng-if="item.pdDisFiscal == 12">DISTRITO FISCAL AMAZONAS</td>
+							<td ng-if="item.pdEstProp ===1">Pendiente</td>
+							<td ng-if="item.pdEstProp ===2">Atendido</td>
+							<td>{{item.pdNroDocumento}}</td>
+							<td ng-if="item.pdFecDocumento == '2016-10-27' ">27-10-2016</td>
+							<td ng-if="item.pdFecDocumento == '2017-01-06' ">06-01-2017</td>
+							<td ng-if="item.pdFecDocumento == '2017-01-18' ">07-01-2017</td>
+							<td>{{item.pdCodBarra}}</td>
+							<td>{{item.pdObs}}</td>
+							<td>
+								<button ng-click="consultaDesignacion.abriModalDesignacion()"
+									class="btn btn-primary btn-xs">Editar</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/ng-template" id="modalDesignacion.html">
+	<div class="include" ng-include="'vistas/oficio/designacion/modalDesignacion.html'">
+	</div>
+</script>
+

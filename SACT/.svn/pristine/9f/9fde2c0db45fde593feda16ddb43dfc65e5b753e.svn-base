@@ -1,0 +1,87 @@
+appbase.service('parametroService', function($http, $rootScope){
+return{
+	registrarParametro:function(nuevoParametro){
+		return $http.post("http://localhost:8080/demobackend/resources/mantenedor/agregarParemetro", nuevoParametro).then(function(response){
+			return response.data;
+		});
+	},
+//	eliminarParametro:function(lstParametroJson){
+//		return $http.post("http://localhost:8080/demobackend/resources/mantenedor/agregarParemetro", lstParametroJson).then(function(response){
+//			return response.data;
+//		});
+//	},
+}
+	});
+	
+	appbase.controller('parametroCtrl',function(parametroService,$http, $modal, $rootScope,$scope) {
+		var entorno = this;
+		
+		$http.get("http://localhost:8080/demobackend/resources/mantenedor/2").then(function(response){
+			console.log("listado rapido parametro");
+			$rootScope.listaTablaTipo.availableOptions = response.data;
+		}, function(response){
+			alert("error: "+response.data);
+		});
+		
+		/**
+		 * Array que contiene todos los tipos 
+		 */
+		$rootScope.listaTodoTipo = {
+			    availableOptions: [{caDetId:"", caDesc:""}],
+			    selectedOption: {caDetId: '2', caDesc: 'Tipo Resolución'} 
+			    };
+		$http.get($rootScope.listaTipo).then(function(response){
+			console.log("listado combo parametro");
+			$rootScope.listaTodoTipo.availableOptions = response.data;
+		}, function(response){
+			alert("error: "+response.data);
+		});
+		
+		/**
+		 * Array de los parametros
+		 */
+		$rootScope.listaTablaTipo = {
+			    availableOptions: [{caDetId:"", caDesc:""}]
+			    };
+		
+		this.consultaTipo=function(){
+			$http.get("http://localhost:8080/demobackend/resources/mantenedor/"+$rootScope.listaTodoTipo.selectedOption.caDetId).then(function(response){
+				$rootScope.listaTablaTipo.availableOptions = response.data;
+			}, function(response){
+				alert("error: "+response.data);
+			});
+  			
+  		};
+  		
+  		/**
+  		 * Funcion añadir parametro
+  		 */
+  		this.agregar = function(mantenedor){ 
+  			var nuevoParametro = { caIdDet: parseInt($rootScope.listaTodoTipo.selectedOption.caDetId, 10),
+  								   caDetId: $rootScope.listaTablaTipo.availableOptions.length+1, 
+  								   caDesc : mantenedor.caDesc 
+  								  };
+  			
+  				$rootScope.listaTablaTipo.availableOptions.push(nuevoParametro);
+  				parametroService.registrarParametro(nuevoParametro).then(function(respuesta){
+  					console.log("SE REGISTRO EL PARAMETRO :: "+respuesta.mensaje);
+  				}, function(respuesta){
+  					//growl.addInfoMessage("ERROR REGISTRAR :"+respuesta.mensaje);
+  				});
+  			
+  		};
+  		
+  		/**
+  		 * Funcion eliminar parametro
+  		 */
+  		this.eliminar = function(listaTablaTipo,item2) {
+  			if(confirm("desea eliminar?"))
+  				listaTablaTipo.splice(listaTablaTipo.indexOf(item2), 1);
+			//$scope.lstDelitosJson.splice($scope.lstDelitosJson.indexOf(item), 1);
+		};
+		
+	});
+	
+	
+	
+	

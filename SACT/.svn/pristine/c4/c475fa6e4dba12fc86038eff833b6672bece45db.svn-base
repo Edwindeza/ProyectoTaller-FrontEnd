@@ -1,0 +1,136 @@
+	appbase.service('consultaService', function($http, $rootScope){
+		return{
+			nuevoUaivit:function(datos){
+				return $http.post($rootScope.udavitRESTUrlRecurso+'/unidades/agregarUaivit',datos ).then(function(response){
+					return response.data;
+				});
+			},
+			
+			
+			listar:function(){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listado').then(function(response){
+					return response.data;
+				});
+			},
+			
+			
+			listarUdavit:function(id){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/mostrar/'+id).then(function(response){
+					return response.data;
+				});
+			},
+			
+			
+			
+			listarUaivit:function(id){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listadoUaivit/'+id).then(function(response){
+					return response.data;
+				});
+			},
+			
+			listarpaginado:function(pagina, cantidad){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listado/'+pagina+'/'+cantidad).then(function(response){
+					return response.data;
+				});
+			},
+			
+			listarpaginadobusqueda:function(pagina, cantidad, buscar){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listado/'+pagina+'/'+cantidad+'/'+buscar).then(function(response){
+					return response.data;
+				});
+			},
+			
+
+		}
+	});
+	
+	appbase.controller('consultaCtrl',function(consultaService,$http, $modal, $rootScope,$scope) {
+		
+		var entorno=this;
+		/**
+		 * Datos de consulta
+		 */
+		$rootScope.cDatos={
+				nroResolucion:"",
+				cbarra:"",
+				nroOficio:"",
+				fInicio:"",
+				fFin:"",
+				origen:"",
+				tipoResolucion:"",
+				tipoEstado:""
+		};
+		
+		/**
+		 * Llenar combos
+		 */
+		$rootScope.cDatos.origen = {
+			    availableOptions: [{caDetId:"", caDesc:""}],
+			    selectedOption: {caDetId: '1', caDesc: 'SEGFN'} 
+			    };
+		$http.get($rootScope.listarTipoOrigen).then(function(response){
+			$rootScope.cDatos.origen.availableOptions = response.data;
+		}, function(response){
+			alert("error: "+response.data);
+		});
+		
+		$rootScope.cDatos.tipoResolucion = {
+			    availableOptions: [{caDetId:"", caDesc:""}],
+			    selectedOption: {caDetId: '1', caDesc: 'Viajes Exterior'} 
+			    };
+		$http.get($rootScope.listarTipoResolucion).then(function(response){
+			$rootScope.cDatos.tipoResolucion.availableOptions = response.data;
+		}, function(response){
+			alert("error: "+response.data);
+		});
+		
+		$rootScope.cDatos.tipoEstado = {
+			    availableOptions: [{caDetId:"", caDesc:""}],
+			    selectedOption: {caDetId: '1', caDesc: 'Proyecto'} 
+			    };
+		$http.get($rootScope.listarTipoEstado).then(function(response){
+			$rootScope.cDatos.tipoEstado.availableOptions = response.data;
+		}, function(response){
+			alert("error: "+response.data);
+		});
+		//fin
+		
+		
+		this.consultaResoluciones=function(){
+			console.log("entro ::");
+			console.log("Se envia estos datos::" + $rootScope.cDatos);
+        	$http.post($rootScope.consultaResoluciones,$rootScope.cDatos).then(function(lista){
+        		console.log("ENCONTRO ::" + lista.data);
+        		//$rootScope.datosResolucion =lista.data;//WHR
+  			}, function(response){
+				console.log("Error: Consulta RESOLUCION "+response);
+			});
+  	}
+		
+		
+  	//calendario
+		entorno.calendarioAbierto = false;
+		entorno.calendarioAbierto2 = false;
+		entorno.formats = ['dd/MM/yyyy','dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		entorno.format = entorno.formats[0];
+
+		this.abrirCalendario = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto = true;
+  		};
+
+  		this.abrirCalendario2 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto2 = true;
+  		};
+  		
+  		entorno.dateOptions = {
+    		formatYear: 'yyyy',
+    		startingDay: 1
+  		};
+		//fin calendario
+		
+	});
+	

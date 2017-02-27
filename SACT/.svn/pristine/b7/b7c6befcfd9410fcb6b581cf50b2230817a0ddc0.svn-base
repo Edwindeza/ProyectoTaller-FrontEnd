@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='appbase'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SISECGEN</title>
+
+
+
+<link href="recursos/css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="recursos/css/accesos.css" rel="stylesheet" media="screen">
+<link href="recursos/css/dashboard.css" rel="stylesheet" media="screen">
+<link href="recursos/css/estilosPrincipal.css" rel="stylesheet"
+	media="screen">
+
+
+<script src="componentes/angular/angular.min.js"></script>
+
+<script type="text/javascript" src="componentes/acute/acute.select.js"></script>
+<link href="componentes/acute/acute.select.css" rel="stylesheet" />
+<script type="text/javascript" src="AcuteTest.js"></script>
+
+
+<script src="componentes/angular-locale/angular-locale_es-pe.js"></script>
+<script src="componentes/angular-route/angular-route.min.js"></script>
+<script src="componentes/ui-bootstrap/ui-bootstrap.min.js"></script>
+<script src="componentes/satellizer/satellizer.min.js"></script>
+
+<!-- 	alertas -->
+<script src="recursos/js/sweetalert.min.js"></script>
+<link rel="stylesheet" href="recursos/css/sweetalert.css" type="text/css"/>	
+<link rel="stylesheet" href="recursos/css/bootstrap-timepicker.css" type="text/css"/>	
+
+<script src="appbase.js"></script>
+<script src="controladores/loginCtrl.js"></script>
+<script src="controladores/resoluciones/viajeCtrl.js"></script>
+<script src="controladores/resoluciones/consultaCtrl.js"></script>
+<script src="controladores/resoluciones/representanteCtrl.js"></script>
+<script src="controladores/resoluciones/parametro/parametroCtrl.js"></script>
+<script src="controladores/resoluciones/parametro/dependenciaCtrl.js"></script>
+<script src="controladores/oficio/designacion/designacionCtrl.js"></script>
+<script src="controladores/oficio/designacion/consultaDesignacionCtrl.js"></script>
+
+
+
+
+<!-- Select2 theme -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+
+  <!--
+    Selectize theme
+    Less versions are available at https://github.com/brianreavis/selectize.js/tree/master/dist/less
+  -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+  <!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap2.css"> -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">
+
+
+</head>
+
+<body ng-controller='globalCtrl'>
+	<div class="titulo">
+		<h3>SISTEMA INTEGRAL DE LA SECRETARIA GENERAL</h3>
+	</div>
+<nav class="navbar navbar-default navbar-inner">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Guia de navegacion</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">SISECGEN</a>
+			</div>
+
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav" >
+					<li dropdown><a href="#" dropdown-toggle>Gestion Resoluciones<b class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li class="dropdown-submenu" ><a  href="#" >NUEVO</a>
+								<ul class="dropdown-menu" role="menu" >
+									<li role="menuitem"><a href="#/viajeExterior">Resolución-Viaje al Exterior</a></li>
+									<li role="menuitem"><a href="#/representante">Resolución-Representantes del MP</a></li>
+									<li role="menuitem"><a href="#/ampliacion">Resolución-Ampliación de Competencias</a></li>
+									<li role="menuitem"><a href="#/otro">Resolución-Otros</a></li>
+									<li role="menuitem"><a href="#/representante">Reportes</a></li>
+								</ul></li>
+							<li class="divider"></li>
+							<li role="menuitem"><a href="#/consulta">CONSULTA</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-submenu" ><a  href="#" >SEGUIMIENTO</a>
+								<ul class="dropdown-menu" role="menu" >
+									<li role="menuitem"><a href="#/viajeSeguimiento">Resolución-Viaje al Exterior</a></li>
+									<li role="menuitem"><a href="#/representanteSeguimiento">Resolución-Representantes del MP</a></li>
+									<li role="menuitem"><a href="#/ampliacionSeguimiento">Resolución-Ampliación de Competencias</a></li>
+									<li role="menuitem"><a href="#/representante">Reportes</a></li>
+								</ul></li>
+							<li class="divider"></li>	
+							<li class="dropdown-submenu" ><a  href="#" >PARÁMETROS</a>
+								<ul class="dropdown-menu" role="menu" >
+									<li><a tabindex="-1" href="#/general">General</a></li>
+									<li><a tabindex="-1" href="#/dependencia">Dependencia</a></li>
+									<li><a tabindex="-1" href="#">Numeracion</a></li>
+									<li><a tabindex="-1" href="#">Responsable</a></li>
+								</ul></li>
+							<li class="divider"></li>
+							<li class="dropdown-submenu" ><a  href="#" >OFICIO</a>
+								<ul class="dropdown-menu" role="menu" >
+									<li class="dropdown-submenu" ><a  href="#" >Designacion</a>
+										<ul class="dropdown-menu" role="menu" >
+											<li><a tabindex="-1" href="#consultaDesignacion">Consulta</a></li>
+											<li><a tabindex="-1" href="#registroDesignacion">Nuevo</a></li>
+										</ul></li>
+										<li class="divider"></li>
+								</ul></li>
+							<li class="divider"></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div id="container-fluid">
+		<div ng-view></div>
+	</div>
+
+</body>
+
+
+</html>

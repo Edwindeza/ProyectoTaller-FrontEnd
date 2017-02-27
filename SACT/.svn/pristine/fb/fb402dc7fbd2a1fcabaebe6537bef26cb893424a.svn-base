@@ -1,0 +1,643 @@
+<br>
+ 	<div class="row" >
+ 	
+ 		<div class="col-md-5">
+ 			<ul class="list-group">
+				<li class="list-group-item  bloque-titulo">
+					<div class="pull-left">:: Carpetas Fiscales&nbsp;&nbsp;&nbsp;&nbsp;</div>
+					<div class="pull-left">
+						<input type="text" name="buscar"
+							ng-model="filtro.codigo" placeholder="Buscar por caso:" style="font-size: 12px; font-weight: normal;">
+						<button class="btn btn-primary btn-xs" ng-click=""> <span class="glyphicon glyphicon-search"></span></button>
+					</div>
+					<div class="pull-right">
+						<input type="text" name="buscar"
+							ng-model="filtro.uaivit" placeholder="Buscar por UAIVIT:" style="font-size: 12px; font-weight: normal;">
+						<button class="btn btn-primary btn-xs" ng-click=""> <span class="glyphicon glyphicon-search"></span></button>
+					</div>
+					
+					<div class="clearfix"></div>
+				</li>
+				<li class="list-group-item">
+					<div class="box-body"  >
+						<button type="button" class="btn btn-primary btn-xs" ng-click="carpetasAsistencia.abrirBeneficiarios()">+ Crear CAI</button>
+					
+						<table class="table table-condensed table-hover table-striped" style="font-size: 12px; cursor: pointer;">
+							<thead>
+								<tr>
+									<th>Distrito Fiscal</th>
+									<th>Caso</th>
+									<th>UDAVIT</th>
+									<th>UAIVIT</th>
+									<th>Atendido</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									ng-repeat="casos in carpetasAsistencia.listaCasos| filteri18n:{idFormateado:filtro.codigo} | filteri18n:{nombreUaivit:filtro.uaivit}  "  ng-class="{'info':casos.id_unico==carpetasAsistencia.idActivo}"  ng-click="carpetasAsistencia.editar(casos.id_unico)" >
+									<td>{{ casos.nombreDistritoFiscal }}</td>
+									<td>{{ casos.idFormateado}}</td>
+									<td>{{ casos.nombreUdavit }}</td>
+									<td>{{ casos.nombreUaivit }}</td>
+									<td><input type="checkbox" name="myTextEditBox" value="checked" 
+     											 style="margin-left:auto; margin-right:auto;">
+											</td>
+
+								</tr>
+							</tbody>
+
+							<tfoot>
+								<tr>
+								<!-- 	<td colspan="2"><small>Pagina: {{carpetasAsistencia.pagina}} / {{carpetasAsistencia.numeroPaginas}} ({{carpetasAsistencia.cantidadTotal}} Elementos)</small></td> -->
+								</tr>
+							</tfoot>
+
+						</table>
+					</div>
+					<div class="text-center">
+						<pagination total-items="carpetasAsistencia.cantidadTotal"
+							items-per-page="carpetasAsistencia.itemsPorPagina"
+							ng-model="carpetasAsistencia.pagina"
+							max-size="carpetasAsistencia.tamanoMaximo" class="pagination-sm"
+							boundary-links="true" style="margin:0;align:center;"
+							ng-change="carpetasAsistencia.cambioPagina()"
+							first-text="Primera" previous-text="Anterior"
+							next-text="Siguiente" last-text="Ultima"></pagination>
+					</div>
+				</li>
+			</ul>
+		
+ 		</div>
+ 		
+		<div class="col-md-7"  ng-if="carpetasAsistencia.mostrarFormulario">
+			<tabset justified="true">
+				<tab heading="Detalles" >
+					<div class="cajatab">
+						<div class="bloque-titulo">
+							<div class="pull-left">&nbsp;CASO:{{carpetasAsistencia.idAux}}</div>
+							<div class="pull-right">
+								<div class="btn-group">
+	  								<button type="button" class="btn btn-primary btn-xs" ng-click="carpetasAsistencia.abrirBeneficiarios()">+ Crear CAI</button>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div style="padding:10px;">
+							<form name="form1" novalidate class="form-horizontal" style="text-size=10px;">
+								<h4>Carpeta Fiscal</h4>
+								<div class="form-group">
+											<label for="caso" class="col-sm-3 control-label" >Caso Fiscal</label>
+											<div class="col-sm-9"> 
+												<input type="text" name="caso" class="form-control input-sm" required
+												ng-model="carpetasAsistencia.idAux" />
+											</div>
+								</div>
+								<div class="form-group">
+											<label for="delito" class="col-sm-3 control-label" >Delito</label>
+											<div class="col-sm-9"> 
+												<input type="text" name="delito"  class="form-control input-sm" required
+												ng-model="carpetasAsistencia.caso.delito" />
+											</div>
+								</div>
+								<div class="form-group">
+											<label for="distrito" class="col-sm-3 control-label" >Distrito Fiscal</label>
+											<div class="col-sm-9"> 
+												<input type="text" name="distrito" class="form-control input-sm" 
+												required
+												ng-model="carpetasAsistencia.caso.nombreDistritoFiscal" />
+											</div>
+								</div>
+								<div class="form-group">
+											<label for="udavit" class="col-sm-3 control-label" >UDAVIT</label>
+											<div class="col-sm-9"> 
+												<input type="text" name="udavit"  class="form-control input-sm" required
+												ng-model="carpetasAsistencia.caso.nombreUdavit" />
+											</div>
+								</div>
+								<div class="form-group">
+											<label for="uaivit" class="col-sm-3 control-label" >UAIVIT</label>
+											<div class="col-sm-9"> 
+												<input type="text" name="uaivit"  class="form-control input-sm" required
+												ng-model="carpetasAsistencia.caso.nombreUaivit" />
+											</div>
+								</div>
+								<div class="form-group">
+											<label for="incorporacion" class="col-sm-3 control-label" >Fecha de incorporacion</label>
+											<div class="col-sm-9"> 
+												<input type="text" name="incorporacion"  class="form-control input-sm" required
+												ng-model="carpetasAsistencia.fechaAuxIncorporacion" />
+											</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</tab>
+				
+				<tab heading="Beneficiarios">
+					<div class="cajatab">
+						<div class="bloque-titulo">
+							<div class="pull-left">&nbsp;BENEFICIARIOS DE LA CARPETA FISCAL:{{carpetasAsistencia.idAux}}</div>
+							<div class="pull-right">
+									<div class="btn-group">
+		  								<button type="button" class="btn btn-primary btn-xs" ng-click="carpetasAsistencia.abrirBeneficiarios()">+ Agregar</button>
+									</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div class="bloque-titulo">
+							<div class="box-body">
+								<table class="table table-condensed table-hover table-striped" style="font-size: 12px; cursor: pointer;">
+									<thead>
+										<tr>
+											<th>Nombres</th>
+											<th>Apellido Paterno</th>
+											<th>Apellido Materno</th>
+										<!--<th>Documento de Identidad</th> -->
+										<!--<th>Numero de documento</th> -->
+											<th>Sexo</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="personas in carpetasAsistencia.beneficiarios" ng-class="{'info':personas.beneficiarioID==carpetasAsistencia.idBeneficiarioActivo}" ng-click="carpetasAsistencia.editarBeneficiario(personas.beneficiarioID)" >
+											<td>{{ personas.nombres }}</td>
+											<td>{{ personas.apePaterno }}</td>
+											<td>{{ personas.apeMaterno }}</td>
+										<!--<td>{{ personas.id_tip_doc }}</td>-->
+										<!--<td>{{ personas.numeroDocumento }}</td>-->
+											<td>{{ personas.sexo }}</td>
+											
+											
+										</tr>
+									</tbody>
+									<tfoot>
+		                                <tr>
+		                                    <td colspan="3"><small>nbsp</small></td>
+		                                </tr>
+	                            	</tfoot>
+								</table>
+							</div>
+							<br>
+							<div class="clearfix"></div>
+							
+						</div>
+						<div class="bloque-titulo">
+							<div class="pull-left">&nbsp;BENEFICIARIOS CON CARPETA DE ASISTENCIA</div>
+							<div class="pull-right">
+									<div class="btn-group">
+		  								<button type="button" class="btn btn-primary btn-xs" ng-click="carpetasAsistencia.ver(carpetasAsistencia.idActivo)">+ Ver</button>
+									</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div style="padding:10px;">
+						
+							<table class="table table-condensed table-hover table-striped" style="font-size:12px;cursor:pointer;">
+								<thead>
+	                                <tr>
+	                                    <th>&nbsp</th>
+	                                    <th>Apellidos y Nombres</th>
+	                                    <th>Telefono</th>
+	                                </tr>
+	                            </thead>
+	                             <tbody>
+	                                <tr ng-repeat="beneficiarios in carpetasAsistencia.beneficiariosCAI">
+	                                    <td style="width:50px;">
+	                                    	<div class="btn-group" dropdown is-open="status.isopen">
+                                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="" ng-click="carpetasAsistencia.abrirBeneficiarios()">Ver Datos</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="" ng-click="carpetasAsistencia.editarAsistenciaLegal(item.id)">Asistencia Legal</a></li>
+                                                <li><a href="" ng-click="carpetasAsistencia.editarAsistenciaPsicologica(item.id)">Asistencia Psicologica</a></li>
+                                                <li><a href="" ng-click="carpetasAsistencia.editarAsistenciaSocioEconomica(item.id)">Asistencia Socio Economica</a></li>
+                                            </ul>
+                                       		</div>	
+	                                    </td>
+	                                    <td>{{ beneficiarios.apePaternoBeneficiario }}</td>
+	                                    <td>{{ beneficiarios.sexoBeneficiario }}</td>
+	                                </tr>
+	                            </tbody>
+	                    		
+	                            <tfoot>
+	                                <tr>
+	                                    <td colspan="3"><small>&nbsp</small></td>
+	                                </tr>
+	                            </tfoot>
+                        
+							</table>
+						</div>
+					</div>
+				</tab>
+					
+			</tabset>
+		</div>
+						
+ 	</div>
+ <br>
+
+<script type="text/ng-template" id="modalComisionado.html">
+	<div class="include" ng-include="'vistas/resoluciones/viaje/modalComisionado.html'">
+	</div>
+</script>
+ <script type="text/ng-template" id="beneficiariossModal.html">
+	<div class="modal-header">
+        <h3 class="modal-title">DATOS DE IDENTIFICACION</h3>
+    </div>
+	<div class="modal-body">
+		<!---->
+		<tabset justified="true">
+			
+			<tab heading="Datos"  select="beneficiariosModal.limpiarMensajes()">
+				<div class="cajatab">
+					<div class="bloque-titulo">
+						<div class="pull-left">&nbsp;Caso:{{beneficiariosModal.casoFormato}}&nbsp;&nbsp;Beneficiario:{{beneficiariosModal.idActivo}}</div>
+						<div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="beneficiariosModal.guardarDatos()" ng-disabled="formDatos.$invalid" >Guardar</button>
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="beneficiariosModal.eliminar()" ng-disabled="formDatos.$invalid" ng-show="beneficiariosModal.accion=='EDITAR'">Eliminar</button>
+                            </div>
+                        </div>
+						<div class="pull-right" ng-if="beneficiariosModal.mostrarExito"><span class="text-center text-success">Datos guardados exitosamente &nbsp;&nbsp;&nbsp;</span></div>
+                        <div class="pull-right" ng-if="beneficiariosModal.mostrarFalla"><span class="text-center text-danger">Falla al guardar los datos, ya existe &nbsp;&nbsp;&nbsp;</span></div>
+						<div class="clearfix"></div>
+					</div>
+					<div style="padding:10px;">
+						<form name="formDatos" novalidate class="form-horizontal" style="text-size=10px;">
+							<div class="form-group">
+                                <label for="apellidoPaterno" class="col-sm-3 control-label">Apellido Paterno:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="apellidoPaterno" class="form-control input-sm" ng-model="beneficiariosModal.apellidoPaterno" required/>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="apellidoMaterno" class="col-sm-3 control-label">Apellido Materno:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="apellidoMaterno" class="form-control input-sm" ng-model="beneficiariosModal.apellidoMaterno" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombres" class="col-sm-3 control-label">Nombres:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="nombres" class="form-control input-sm" ng-model="beneficiariosModal.nombres" required/>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="edad" class="col-sm-3 control-label">Edad:</label>
+                                <div class="col-sm-1">
+                                    <input type="text" name="edad"  class="form-control input-sm" ng-model="beneficiariosModal.edad" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="detalletipoDocumento" class="col-sm-3 control-label">Tipo Documento:</label>
+                                <div class="col-sm-5">
+                                    <input type="text"  name="detalletipoDocumento" class="form-control input-sm" ng-model="beneficiariosModal.detalletipoDocumento" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="numeroDocumento" class="col-sm-3 control-label">Numero Documento:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="numeroDocumento" class="form-control input-sm" ng-model="beneficiariosModal.numDocumentoBeneficiario" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="genero" class="col-sm-3 control-label">Genero:</label>
+                                <div class="col-sm-2">
+                                    <input type="text"  name="genero" class="form-control input-sm"   ng-model="beneficiariosModal.genero" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="gradoInstruccionBeneficiario" class="col-sm-3 control-label">Grado de Instruccion:</label>
+                                <div class="col-sm-9">
+                                    <select name="gradoInstruccionBeneficiario" ng-model="beneficiariosModal.gradoInstruccionBeneficiario" ng-options="item.idGradInst as item.deGradInst for item in beneficiariosModal.gradosInstruccion"></select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="estadoCivil" class="col-sm-3 control-label">Estado Civil:</label>
+                                <div class="col-sm-9">
+                                    <select name="estadoCivil" ng-model="beneficiariosModal.estadoCivil" ng-options="item.idEstCiv as item.deEstCiv for item in beneficiariosModal.estadosCivil"></select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="nombreTipoBeneficiario" class="col-sm-3 control-label">Condicion:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="nombreTipoBeneficiario" class="form-control input-sm" ng-model="beneficiariosModal.nombreTipoBeneficiario" required >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaNacimiento" class="col-sm-3 control-label">Fecha Nacimiento:</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" datepicker-popup="{{beneficiariosModal.format}}" ng-model="beneficiariosModal.fechaNacimiento" is-open="beneficiariosModal.calendarioAbierto" datepicker-options="beneficiariosModal.dateOptions" ng-required="true" close-text="Cerrar" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="beneficiariosModal.abrirCalendario($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>                                
+                                </div>
+								<label for="fechaIncorporacion" class="col-sm-3 control-label">Incorporacion al programa:</label>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" datepicker-popup="{{beneficiariosModal.format}}" ng-model="beneficiariosModal.fechaIncorporacion" is-open="beneficiariosModal.calendarioAbierto2" datepicker-options="beneficiariosModal.dateOptions" ng-required="true" close-text="Cerrar" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="beneficiariosModal.abrirCalendario2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </div>                                
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="direccion" class="col-sm-3 control-label">Direccion:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="direccion" class="form-control input-sm" ng-model="beneficiariosModal.direccion" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono" class="col-sm-3 control-label">Telefono:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" name="telefono" class="form-control input-sm" ng-model="beneficiariosModal.telefonoBeneficiario" required>
+                                </div>
+								<label for="correo" class="col-sm-3 control-label">Correo:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="correo" class="form-control input-sm" ng-model="beneficiariosModal.correo" required>
+                                </div>
+                            </div>
+							
+						</form>
+					</div> 
+				</div>
+			</tab>
+			<tab heading="Responsable" select="beneficiariosModal.limpiarMensajes()">
+				<div class="cajatab">
+					<div class="bloque-titulo">
+                        <div class="pull-left">&nbsp;Caso:{{beneficiariosModal.casoFormato}}&nbsp;&nbsp;Beneficiario:{{beneficiariosModal.idActivo}}</div>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="beneficiariosModal.guardarResponsable()"  >Guardar</button>
+                            </div>
+                        </div>
+						<div class="pull-right" ng-if="beneficiariosModal.mostrarExito"><span class="text-center text-success">Datos guardados exitosamente &nbsp;&nbsp;&nbsp;</span></div>
+                        <div class="pull-right" ng-if="beneficiariosModal.mostrarFalla"><span class="text-center text-danger">Falla al guardar los datos, ya existe &nbsp;&nbsp;&nbsp;</span></div>						
+                        <div class="clearfix"></div>
+                    </div>
+					 <div style="padding:10px;">
+                        <form name="formResponsable" novalidate class="form-horizontal" style="text-size=10px;">
+                            <div class="form-group">
+                                <label for="nombreResponsable" class="col-sm-3 control-label">Nombres:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nombreResponsable" class="form-control input-sm" ng-model="beneficiariosModal.nombreResponsable" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="apePaternoResponsable" class="col-sm-3 control-label">Apellido Paterno:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="apePaternoResponsable" class="form-control input-sm" ng-model="beneficiariosModal.apePaternoResponsable" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="apeMaternoResponsable" class="col-sm-3 control-label">Apellido Materno:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="apeMaternoResponsable" class="form-control input-sm" ng-model="beneficiariosModal.apeMaternoResponsable" required>
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label for="relacionResponsable" class="col-sm-3 control-label">Relacion con la victima:</label>
+                                <div class="col-sm-9">
+                                    <select name="relacionResponsable" ng-model="beneficiariosModal.relacionResponsable" ng-options="item.idParent as item.deParent for item in beneficiariosModal.relaciones"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edadResponsable" class="col-sm-3 control-label">Edad:</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  name="edadResponsable" class="form-control input-sm" ng-model="beneficiariosModal.edadResponsable" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="tipoDocumentoResponsable" class="col-sm-3 control-label">Documento de identidad:</label>
+                                <div class="col-sm-9">
+                                    <select name="tipoDocumentoResponsable" ng-model="beneficiariosModal.tipoDocumentoResponsable" ng-options="item.idTipoDoc as item.deSiglTipoDoc for item in beneficiariosModal.tiposDocumento"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="documentoResponsable" class="col-sm-3 control-label">Numero de documento:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="documentoResponsable" class="form-control input-sm" ng-model="beneficiariosModal.documentoResponsable" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gradoInstruccionResponsable" class="col-sm-3 control-label">Grado de Instruccion:</label>
+                                <div class="col-sm-9">
+                                    <select name="gradoInstruccionResponsable" ng-model="beneficiariosModal.gradoInstruccionResponsable" ng-options="item.idGradInst as item.deGradInst for item in beneficiariosModal.gradosInstruccion"></select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="generoResponsable" class="col-sm-3 control-label">Genero:</label>
+                                <div class="col-sm-9">
+									<select name="generoResponsable" ng-model="beneficiariosModal.generoResponsable" ng-options="item.id as item.nombre for item in beneficiariosModal.generos"></select>
+                                </div>
+                            </div>
+                           
+ 							
+							
+							<div class="form-group">
+								 <label for="prueba" class="col-sm-3 control-label">NO CONVIVE CON LA VICTIMA?</label>
+								 <div class="col-sm-2">
+									<input type="checkbox" ng-click="myFunc()"  class="col-sm-3 control-label">
+								 </div>
+							 </div>
+							<div ng-show="showMe">
+							 <div class="form-group">
+                                <label for="direccionResponsable" class="col-sm-3 control-label">Direccion:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="direccionResponsable" class="form-control input-sm" ng-model="beneficiariosModal.direccionResponsable" required>
+                                </div>
+                            </div>
+							
+							<div class="form-group">
+                                <label for="referenciaResponsable" class="col-sm-3 control-label">Referencia:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="referenciaResponsable" class="form-control input-sm" ng-model="beneficiariosModal.referenciaResponsable" required>
+                                </div>
+                            </div>							
+
+                            <div class="form-group">
+                                <label for="telefonoResponsable" class="col-sm-3 control-label">Telefono:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="telefonoResponsable" class="form-control input-sm" ng-model="beneficiariosModal.telefonoResponsable" required>
+                                </div>
+                           
+							</div>
+							</div>	
+                        </form>
+                    </div>
+				</div>
+			</tab>
+			<tab heading="Agresor" select="beneficiariosModal.limpiarMensajes()">
+				<div class="cajatab">
+					<div class="bloque-titulo">
+                        <div class="pull-left">&nbsp;Caso:{{beneficiariosModal.casoFormato}}&nbsp;&nbsp;Beneficiario:{{beneficiariosModal.idActivo}}</div>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="beneficiariosModal.guardarAgresor()" >Guardar</button>
+                            </div>
+                        </div>
+                        <div class="pull-right" ng-if="beneficiariosModal.mostrarExito"><span class="text-center text-success">Datos guardados exitosamente &nbsp;&nbsp;&nbsp;</span></div>
+                        <div class="pull-right" ng-if="beneficiariosModal.mostrarFalla"><span class="text-center text-danger">Falla al guardar los datos, ya existe &nbsp;&nbsp;&nbsp;</span></div>
+                        <div class="clearfix"></div>
+                    </div>
+					<div style="padding:10px;">
+                        <form name="formAgresor" novalidate class="form-horizontal" style="text-size=10px;">
+                            <div class="form-group">
+                                <label for="nombreAgresor" class="col-sm-3 control-label">Nombres:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="nombreAgresor" class="form-control input-sm" ng-model="beneficiariosModal.nombreAgresor" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="apePaternoAgresor" class="col-sm-3 control-label">Apellido paterno:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="apePaternoAgresor" class="form-control input-sm" ng-model="beneficiariosModal.apePaternoAgresor" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="apeMaternoAgresor" class="col-sm-3 control-label">Apellido materno:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="apeMaternoAgresor" class="form-control input-sm" ng-model="beneficiariosModal.apeMaternoAgresor" required>
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label for="relacionAgresor" class="col-sm-3 control-label">Relacion con la victima:</label>
+                                <div class="col-sm-9">
+                                    <select name="relacionAgresor" ng-model="beneficiariosModal.relacionAgresor" ng-options="item.idParent as item.deParent for item in beneficiariosModal.relaciones"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edadAgresor" class="col-sm-3 control-label">Edad:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="edadAgresor" class="form-control input-sm" ng-model="beneficiariosModal.edadAgresor" required>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="tipoDocumentoAgresor" class="col-sm-3 control-label">Documento de identidad:</label>
+                                <div class="col-sm-9">
+                                    <select name="tipoDocumentoAgresor" ng-model="beneficiariosModal.tipoDocumentoAgresor" ng-options="item.idTipoDoc as item.deSiglTipoDoc for item in beneficiariosModal.tiposDocumento"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="documentoAgresor" class="col-sm-3 control-label">Numero de documento:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="documentoAgresor" class="form-control input-sm" ng-model="beneficiariosModal.documentoAgresor" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gradoInstruccionAgresor" class="col-sm-3 control-label">Grado de Instruccion:</label>
+                                <div class="col-sm-9">
+                                    <select name="gradoInstruccionAgresor" ng-model="beneficiariosModal.gradoInstruccionAgresor" ng-options="item.idGradInst as item.deGradInst for item in beneficiariosModal.gradosInstruccion"></select>
+                                </div>
+                            </div>
+							
+						    <div class="form-group">
+                                <label for="generoAgresor" class="col-sm-3 control-label">Genero:</label>
+                                <div class="col-sm-9">
+									<select name="generoAgresor" ng-model="beneficiariosModal.generoAgresor" ng-options="item.id as item.nombre for item in beneficiariosModal.generos"></select>
+                                </div>
+                            </div>
+								
+							<div class="form-group">
+								 <label for="prueba" class="col-sm-3 control-label">NO CONVIVE CON LA VICTIMA?</label>
+								 <div class="col-sm-2">
+									<input type="checkbox" ng-click="myFunc()"  class="col-sm-3 control-label">
+								 </div>
+							 </div>
+
+							<div ng-show="showMe">
+                            <div class="form-group">
+                                <label for="direccionAgresor" class="col-sm-3 control-label">Direccion:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="direccionAgresor" class="form-control input-sm" ng-model="beneficiariosModal.direccionAgresor" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="referenciaAgresor" class="col-sm-3 control-label">Referencia:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="referenciaAgresor" class="form-control input-sm" ng-model="beneficiariosModal.referenciaAgresor" required>
+                                </div>
+                            </div>
+							</div>
+                        </form>
+                    </div>
+				</div>
+			</tab>
+			<tab heading="Motivo de ingreso" select="beneficiariosModal.limpiarMensajes()">
+				<div class="cajatab">
+					<div class="bloque-titulo">
+                        <div class="pull-left">&nbsp;Caso:{{beneficiariosModal.casoFormato}}&nbsp;&nbsp;Beneficiario:{{beneficiariosModal.idActivo}}</div>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-xs" ng-click="beneficiariosModal.guardarMotivo()"  ng-disabled="formMotivo.$invalid">Guardar</button>
+                            </div>
+                        </div>
+						<div class="pull-right" ng-if="beneficiariosModal.mostrarExito"><span class="text-center text-success">Datos guardados exitosamente &nbsp;&nbsp;&nbsp;</span></div>
+                        <div class="pull-right" ng-if="beneficiariosModal.mostrarFalla"><span class="text-center text-danger">Falla al guardar los datos, ya existe &nbsp;&nbsp;&nbsp;</span></div>                  
+                        <div class="clearfix"></div>
+                    </div>
+					<div style="padding:10px;">
+                        <form name="formMotivo" novalidate class="form-horizontal" style="text-size=10px;">
+                            <div class="form-group">
+                                <label for="procedencia" class="col-sm-3 control-label">Procedencia:</label>
+                                <div class="col-sm-9">
+                                    <select name="procedencia" ng-model="beneficiariosModal.procedencia" ng-options="item.procedenciaID as item.nombre for item in beneficiariosModal.procedencias"></select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="detalleProcedencia" class="col-sm-3 control-label">Detallar(opcional):</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="detalleProcedencia"  class="form-control input-sm" ng-model="beneficiariosModal.detalleProcedencia" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="motivo" class="col-sm-3 control-label">Delito motivo de ingreso:</label>
+                                <div class="col-sm-9">
+                                    <select name="motivo" ng-model="beneficiariosModal.motivo" ng-options="item.motivoID as item.nombre for item in beneficiariosModal.motivos"></select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label for="detalleMotivo" class="col-sm-3 control-label">Detallar(opcional):</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="detalleMotivo"  class="form-control input-sm" ng-model="beneficiariosModal.detalleMotivo" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="responsableDerivacion" class="col-sm-3 control-label">Responsable de Derivacion:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="responsableDerivacion"  class="form-control input-sm" ng-model="beneficiariosModal.responsableDerivacion" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaDerivacion" class="col-sm-3 control-label">Fecha Derivacion:</label>
+                                <div class="col-sm-9">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control input-sm" datepicker-popup="{{beneficiariosModal.format}}" ng-model="beneficiariosModal.fechaDerivacion" is-open="beneficiariosModal.calendarioAbierto" datepicker-options="beneficiariosModal.dateOptions" ng-required="true" close-text="Cerrar" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="beneficiariosModal.abrirCalendario($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>                                
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+				</div>
+			</tab>
+			
+		</tabset>
+	</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="beneficiariosModal.ok()">Salir</button>
+        <!--<button class="btn btn-warning" ng-click="beneficiariosModal.cancel()">Cancel</button>-->
+    </div>   
+ </script>

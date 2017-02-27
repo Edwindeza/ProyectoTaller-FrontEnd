@@ -1,0 +1,205 @@
+	appbase.service('unidadesAsistenciaService', function($http, $rootScope){
+		return{
+			nuevoUaivit:function(datos){
+				return $http.post($rootScope.udavitRESTUrlRecurso+'/unidades/agregarUaivit',datos ).then(function(response){
+					return response.data;
+				});
+			},
+			
+			
+			listar:function(){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listado').then(function(response){
+					return response.data;
+				});
+			},
+			
+			
+			listarUdavit:function(id){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/mostrar/'+id).then(function(response){
+					return response.data;
+				});
+			},
+			
+			
+			
+			listarUaivit:function(id){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listadoUaivit/'+id).then(function(response){
+					return response.data;
+				});
+			},
+			
+			listarpaginado:function(pagina, cantidad){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listado/'+pagina+'/'+cantidad).then(function(response){
+					return response.data;
+				});
+			},
+			
+			listarpaginadobusqueda:function(pagina, cantidad, buscar){
+				return $http.get($rootScope.udavitRESTUrlRecurso+'/unidades/listado/'+pagina+'/'+cantidad+'/'+buscar).then(function(response){
+					return response.data;
+				});
+			},
+			
+
+		}
+	});
+	
+	appbase.controller('unidadesAsistenciaCtrl',function(unidadesAsistenciaService,$http, $modal, $rootScope) {
+		var entorno=this;
+		entorno.lista=[];
+		entorno.listaUnidades=[];
+		entorno.listaUaivit=[];
+		entorno.udavit;
+		entorno.fechaAuxCreacion;
+		
+		entorno.mostrarFormulario=false;
+		entorno.accion="INICIO";
+		entorno.idActivo=0;
+		
+		entorno.tamanoMaximo = 5;
+  		entorno.cantidadTotal = 0;
+  		entorno.pagina = 1;
+  		entorno.numeroPaginas=0;
+  		entorno.itemsPorPagina=10;
+  		entorno.buscar="";
+		
+		$http.get($rootScope.udavitRESTUrl3).then(function(lista){
+			entorno.cambioPagina();
+			
+			entorno.listaUnidades = lista.data;
+			//entorno.listarpaginado();
+		}, function(response){
+			alert("error: "+lista.data);
+		});
+	
+		
+		this.cambioPagina = function() {
+    		entorno.listarpaginadobusqueda();
+  		};
+  		
+  		this.listarpaginado=function(){
+			unidadesAsistenciaService.listarpaginado(entorno.pagina, entorno.itemsPorPagina).then(function(lista){
+				entorno.lista=lista.lista;
+				entorno.cantidadTotal = lista.cantidadTotal;
+				entorno.pagina = lista.pagina+1;
+				entorno.numeroPaginas=lista.numeroPaginas;
+			});
+		}
+  		
+  		
+  		this.listarpaginadobusqueda=function(){
+			var buscartemp="__VACIO__";
+			if(entorno.buscar!==""){
+				buscartemp=entorno.buscar;
+			}
+
+			unidadesAsistenciaService.listarpaginadobusqueda(entorno.pagina, entorno.itemsPorPagina, buscartemp).then(function(data){
+				entorno.listaUnidades=data.lista;				
+				entorno.cantidadTotal = data.cantidadTotal;
+				entorno.pagina = data.pagina;
+				entorno.numeroPaginas=lista.numeroPaginas;
+			});
+		};
+		
+		
+
+		this.editar=function(id){
+			
+			unidadesAsistenciaService.listarUdavit(id).then(function(respuesta){
+				if(respuesta.estado=="OK"){
+					entorno.mostrarFormulario=true;
+					entorno.udavit=respuesta.dato;
+					var date = new Date(entorno.udavit.fechaCreacion);
+					entorno.fechaAuxCreacion=date.getDay()+ '-' +date.getMonth()+'-'+date.getFullYear();
+				}
+				
+			});
+			
+			unidadesAsistenciaService.listarUaivit(id).then(function(respuesta){
+				if(respuesta.estado=="OK"){
+					entorno.listaUaivit=respuesta.list;
+					
+				}
+			
+			});	
+			entorno.idActivo=id;
+		};		
+
+		
+		this.abrirUaivit = function () {
+    		var modalInstance =  $modal.open({
+      			animation: true,
+      			templateUrl: 'uaivitModal.html',
+      			controller: 'uaivitModalCtrl',
+      			controllerAs: 'uaivitModal',
+      			size: 'size',	
+      			resolve: {
+      				uaivitModal: function () {
+          				return {
+//          					idBeneficiario:entorno.idBeneficiarioActivo,
+         					idUnidad:entorno.idActivo,
+         					estado:entorno.accion='NUEVO'
+          				};
+          				
+        			}
+      			}
+    		});
+  		};
+		
+	});
+	
+	appbase.controller('uaivitModalCtrl',function (unidadesAsistenciaService, $scope, $modalInstance , uaivitModal) {
+		var entorno=this;
+		entorno.idActivo=uaivitModal.idUnidad;
+		entorno.accion=uaivitModal.estado;
+
+		this.guardarDatos=function(){
+			
+			if(entorno.accion=='NUEVO'){
+				unidadesAsistenciaService.listarUaivit(entorno.idActivo).then(function(respuesta){
+					entorno.iduaivit=respuesta.count+1;
+					
+				});
+				var ahora = new Date();
+				
+				var clave =  {
+						udavitID:entorno.idActivo,
+						uaivitID:entorno.iduaivit,
+	  			}
+				
+				var datos={
+					id:clave,
+					nombreCorto:entorno.nombreCorto,
+					nombreLargo:'UAIVIT-'+ entorno.nombreCorto,
+					usuarioID:entorno.coordinador,
+					estado:'H',
+					usuarioCreacion:"no aplica",
+					fechaCreacion:ahora,
+					usuarioModificacion:"no aplica",
+					fechaModificacion:null,
+					
+				}
+				
+				unidadesAsistenciaService.nuevoUaivit(datos).then(function(respuesta){
+					if(respuesta.estado=="OK"){
+						alert("bien");
+						entorno.mostrarExito=true;
+						entorno.mostrarFalla=false;
+					}else{
+						alert("mal");
+						entorno.mostrarExito=false;
+						entorno.mostrarFalla=true;
+					}
+				});
+				alert("salio");
+			}
+		}
+		
+		
+		
+		this.ok = function () {
+    		$modalInstance.close(entorno.idActivo);
+  		}
+		
+	});
+	

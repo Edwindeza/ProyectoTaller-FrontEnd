@@ -1,0 +1,51 @@
+html{
+	background: #FFF;
+	background-size: cover;
+	height: 100%;
+}
+body{
+	background: none;
+	color:#222;
+}
+
+.contenedor{
+	padding: 0 2em;
+}
+
+.titulo{
+
+	background: #01344F url(../img/logo2.png) no-repeat;
+	background-size: auto 80%;
+	background-repeat: no-repeat;
+    background-position: left;
+	/*
+	color: #EEE;
+	border: solid #01344F 5px;
+	*/
+	color: #fff;
+  	background-color: #337ab7;
+  	border-color: #2e6da4;
+}
+.titulo h3{
+	margin: 0 auto;
+	max-width: 800px;
+	padding: 0.5em;
+	text-align: center;
+}
+
+.subtitulo{
+	padding: 5px 20px;
+}
+
+.app-modal-window .modal-dialog {
+  width: 1600px;
+}
+
+/*
+.navbar li a{
+	background: #01344F;
+	color: #EEE;
+}*/
+.navbar{	
+	border-radius: 0;
+}

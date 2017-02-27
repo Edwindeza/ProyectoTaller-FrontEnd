@@ -1,0 +1,287 @@
+appbase
+		.service(
+				'consultaDesignacionService',
+				function($http, $rootScope) {
+					return {
+						nuevoUaivit : function(datos) {
+							return $http.post(
+									$rootScope.udavitRESTUrlRecurso
+											+ '/unidades/agregarUaivit', datos)
+									.then(function(response) {
+										return response.data;
+									});
+						},
+
+						listarDF : function() {
+							return $http
+									.get(
+											"http://localhost:8080/demoseguridadbackend/resources/maestro/listaDF")
+									.then(function(response) {
+										return response.data;
+									});
+						},
+
+						consultarPropuesta : function(datosConsulta) {
+							return $http
+									.post(
+											"http://localhost:8080/demobackend/resources/designacion/consultarPropuesta",
+											datosConsulta).then(
+											function(response) {
+												return response.data;
+											});
+						}
+
+					}
+				});
+
+appbase
+		.controller(
+				'consultaDesignacionCtrl',
+				function(consultaDesignacionService, $http, $modal, $rootScope,
+						$scope, $filter) {
+
+					var entorno = this;
+					$rootScope.listaDesignacion = {
+						pdId : "",
+						pdTipProp : "",
+						pdEstProp : "",
+						pdDisFiscal : "",
+						pdCodBarra : "",
+						pdNroDocumento : "",
+						pdFecDocumento : "",
+						pdSumilla : "",
+						pdObs : ""
+					};
+					
+					/**
+					 * Datos de consulta
+					 */
+					$rootScope.cDesignacion = {
+						tipoPropuesta : "",
+						estadoPropuesta : "",
+						fiscales : "",
+						listaDependencia : "",
+						listaDF : "",
+						fechaInicio : "",
+						fechaFin : "",
+						numeroDocumento : "",
+						codigoBarra : "",
+						cargoPropuesto : "",
+					};
+
+					/**
+					 * COMBOS
+					 */
+
+					$rootScope.cDesignacion.listaDF = {
+						availableOptions : [ {
+							codiDijuDju : "",
+							descDijuDju : ""
+						} ],
+						selectedOption : {
+							codiDijuDju : "",
+							descDijuDju : "Seleccione"
+						}
+					};
+					$http
+							.get(
+									"http://localhost:8080/demoseguridadbackend/resources/maestro/listaDF")
+							.then(
+									function(response) {
+										$rootScope.cDesignacion.listaDF.availableOptions = response.data;
+									}, function(response) {
+										alert("error: " + response.data);
+									});
+
+					$rootScope.cDesignacion.listaDependencia = {
+						availableOptions : [ {
+							codiDepeTde : "",
+							descLargTde : ""
+						} ],
+						selectedOption : {
+							codiDepeTde : "",
+							descLargTde : 'Seleccione'
+						}
+					};
+					$http
+							.get(
+									"http://localhost:8080/demoseguridadbackend/resources/maestro/listaDependencias")
+							.then(
+									function(response) {
+										$rootScope.cDesignacion.listaDependencia.availableOptions = response.data;
+
+									}, function(response) {
+										alert("error: " + response.data);
+									});
+
+					$scope.listaFiscal = [ {
+						codiEmplPer : "",
+						nombCortPer : "",
+						codiCargTca : ""
+					} ];
+					$rootScope.cDesignacion.fiscales = {
+						availableOptions : [ {
+							codiEmplPer : "0001",
+							apeMatPer : "Supo",
+							apePatPer : "Palomino",
+							nomEmpPer : "Fernando",
+							nombCortPer : "Supo Palomino, Fernando Antonio",
+							codiCargTca : "00012"
+						} ],
+						selectedOption : {
+							codiEmplPer : '1',
+							nombCortPer : 'Proyecto'
+						}
+					};
+
+					// $http.get($rootScope.listarFiscales).then(function(response){
+					// $rootScope.cDesignacion.fiscales.availableOptions =
+					// response.data;
+					// $scope.listaFiscal=response.data;
+					// }, function(response){
+					// alert("error: "+response.data);
+					// });
+					//		
+					$rootScope.cDesignacion.tipoPropuesta = {
+						availableOptions : [ {
+							caDetId : "1",
+							caDesc : "Fiscal"
+						}, {
+							caDetId : "2",
+							caDesc : "Funcionario"
+						} ],
+						selectedOption : {
+							caDetId : '1',
+							caDesc : 'Fiscal'
+						}
+					};
+
+					$rootScope.cDesignacion.estadoPropuesta = {
+						availableOptions : [ {
+							caDetId : "1",
+							caDesc : "Pendiente"
+						}, {
+							caDetId : "2",
+							caDesc : "Atendido"
+						} ],
+						selectedOption : {
+							caDetId : '1',
+							caDesc : 'Pendiente'
+						}
+					};
+					// fin
+
+					/**
+					 * CALENDARIO
+					 */
+					entorno.calendarioAbierto = false;
+					entorno.calendarioAbierto2 = false;
+					entorno.formats = [ 'dd/MM/yyyy', 'dd-MM-yyyy',
+							'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate' ];
+					entorno.format = entorno.formats[1];
+
+					this.abrirCalendario = function($event) {
+						$event.preventDefault();
+						$event.stopPropagation();
+						entorno.calendarioAbierto = true;
+					};
+
+					this.abrirCalendario2 = function($event) {
+						$event.preventDefault();
+						$event.stopPropagation();
+						entorno.calendarioAbierto2 = true;
+					};
+
+					entorno.dateOptions = {
+						formatYear : 'yyyy',
+						startingDay : 1
+					};
+
+					/**
+					 * FUNCION CONSULTA
+					 */
+					var today = $filter('date')
+							($rootScope.cDesignacion.fechaInicio,
+									"MMM-dd-yyyy ");
+
+					this.consultaPropuesta = function() {
+						$rootScope.datosConsulta = {
+
+							tipoPropuesta : $rootScope.cDesignacion.tipoPropuesta.selectedOption.caDetId,
+							estadoPropuesta : $rootScope.cDesignacion.estadoPropuesta.selectedOption.caDetId,
+							distritoFiscal : $rootScope.cDesignacion.listaDF.selectedOption.codiDijuDju,
+							dependencia : $rootScope.cDesignacion.listaDependencia.selectedOption.codiDepeTde,
+							fiscal : $rootScope.cDesignacion.fiscales.selectedOption.codiEmplPer,
+
+							numeroDocumento : $rootScope.cDesignacion.numeroDocumento,
+							codigoBarra : $rootScope.cDesignacion.codigoBarra,
+							cargo : $rootScope.cDesignacion.cargoPropuesto,
+							fechaInicio : $rootScope.cDesignacion.fechaInicio,
+							fechaFin : $rootScope.cDesignacion.fechaFin
+						}
+
+						consultaDesignacionService.consultarPropuesta($rootScope.datosConsulta).then(function(respuesta) {
+									console.log("regreso :3 ");
+									$rootScope.listaDesignacion = respuesta;
+								}, function(response) {
+									alert("error: " + response);
+								});
+					}
+
+					/**
+					 * MODAL MODIFICAR
+					 */
+					this.abriModalDesignacion = function() {
+						var modalInstance = $modal.open({
+							animation : true,
+							templateUrl : 'modalDesignacion.html',
+							controller : 'designacionModalCtrl',
+							controllerAs : 'modalDesignado',
+							size : 'lg',
+							windowClass : 'app-modal-window',
+							resolve : {}
+						});
+					};
+
+				});
+
+appbase.controller('designacionModalCtrl', function($modalInstance, $modal, $rootScope, $scope) {
+	var entorno2 = $scope;
+	
+	
+	$rootScope.cDesignacion.tipoPropuesta = {
+			availableOptions : [ {
+				caDetId : "1",
+				caDesc : "Fiscal"
+			}, {
+				caDetId : "2",
+				caDesc : "Funcionario"
+			} ],
+			selectedOption : {
+				caDetId : '1',
+				caDesc : 'Fiscal'
+			}
+		};
+
+		$rootScope.cDesignacion.estadoPropuesta = {
+			availableOptions : [ {
+				caDetId : "1",
+				caDesc : "Pendiente"
+			}, {
+				caDetId : "2",
+				caDesc : "Atendido"
+			} ],
+			selectedOption : {
+				caDetId : '1',
+				caDesc : 'Pendiente'
+			}
+		};
+	
+
+	entorno2.cerrarModal = function() {
+		console.log("cerrar modal actualizar");
+		$rootScope.modalInstance.close('cerrar');
+	};
+
+});
+

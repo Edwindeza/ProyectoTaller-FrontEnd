@@ -1,0 +1,122 @@
+	appbase.service('dependenciaService', function($http, $rootScope){
+return{
+	registrarParametro:function(nuevoParametro){
+		return $http.post("http://localhost:8080/demobackend/resources/mantenedor/agregarParemetro", nuevoParametro).then(function(response){
+			return response.data;
+		});
+	},
+	registrarDependencia:function(nuevaDependencia){
+		return $http.post("http://localhost:8080/demobackend/resources/mantenedor/agregarDependencia", nuevaDependencia).then(function(response){
+			return response.data;
+		});
+	},
+//	eliminarParametro:function(lstParametroJson){
+//		return $http.post("http://localhost:8080/demobackend/resources/mantenedor/agregarParemetro", lstParametroJson).then(function(response){
+//			return response.data;
+//		});
+//	},
+}
+	});
+	
+	appbase.controller('dependenciaCtrl',function(dependenciaService,$http, $modal, $rootScope,$scope) {
+		var entorno = this;
+		
+		this.abriModalAgregar=function(){
+  			$rootScope.modalInstance =  $modal.open({
+      			animation: true,
+      				backdrop: 'static', //  cerrar modal clic fuera
+      				//backdropClick: true,
+      				//dialogFade: true,
+      				//keyboard: false, //  cerrar modal ESC
+      			templateUrl: 'modalDependencia.html',
+      			controller: 'dependenciaModalCtrl',
+      			controllerAs: 'dependencia',
+      			size: 'lg',	
+      			resolve: {}
+    		});
+  		};
+  		
+  		
+  		/**
+		 * Listar todas las dependencias
+		 */
+		$rootScope.listaDependencia = {
+			    availableOptions: [{
+			    	deId:"", 
+			    	deNombre:"",
+			    	deTelefono:"",
+			    	deAnexo:"",
+			    	deRepresentante:"",
+			    	deObservacion:""
+			    		}]
+		};
+		
+		$http.get("http://localhost:8080/demobackend/resources/mantenedor/listaDependencia").then(function(response){
+			$rootScope.listaDependencia.availableOptions = response.data;
+		}, function(response){
+			alert("error: "+response.data);
+		});
+		
+  		
+	});
+	
+	
+	appbase.controller('dependenciaModalCtrl',function (parametroService,$modalInstance,$rootScope,$scope,$location,$http,$modal) {
+		var entorno2 = this;
+		var entorno4 = $scope;
+		
+		$rootScope.registro = {
+			nombre:"",
+			direccion:"",
+			telefono:"",
+			anexo:"",
+			correo:"",
+			representante:"",
+			observacion:""
+				};
+
+		this.guardarDependencia = function(registro) {
+			swal({
+				   title: "CONFIRMACION",
+				   text: "Esta seguro que desea agregar",
+				   showCancelButton: true,
+				   confirmButtonText: "Aceptar"
+				   }, 
+				   function(isConfirm){
+					   if (isConfirm) { 
+						   var nuevoDel = { 
+									  deNombre:registro.nombre,
+									  deTelefono:registro.telefono,
+									  deAnexo:registro.anexo,
+									  deRepresentante:registro.representante,
+									  deObservacion:registro.observacion
+									  };
+							  console.log(nuevoDel);
+							  parametroService.registrarDependencia(nuevoDel).then(function(respuesta){
+				  					$rootScope.modalInstance.close('cerrar');
+				  					growl.addInfoMessage("REGISTRO CORRECTO :"+respuesta.mensaje);
+				  				}, function(respuesta){
+				  					growl.addInfoMessage("ERROR REGISTRAR :"+respuesta.mensaje);
+				  				});
+					   } else {
+						   console.log("cerrado");
+					   }
+				});	
+			};
+			
+		$scope.deleteDelito = function(lstDelitos,item) {
+				lstDelitos.splice(lstDelitos.indexOf(item), 1);
+			};
+			
+		this.cerrarModal = function () {
+				$rootScope.modalInstance.close({
+	      			animation: true,
+	      			size: 'lg',	
+	      			resolve: {}
+	    		});
+		 };
+			
+	});
+	
+	
+	

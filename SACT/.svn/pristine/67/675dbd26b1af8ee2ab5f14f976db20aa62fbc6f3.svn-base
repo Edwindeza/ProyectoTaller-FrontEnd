@@ -1,0 +1,103 @@
+<div growl></div>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h5>COMISIONADOS</h5>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+					<div class="form-group col-xs-9 col-sm-6 col-md-4">
+						<label>Nombre</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-home"></i></span> <input type="text"
+								class="form-control " 
+								ng-model="registro.nombre" />
+						</div>
+					</div>
+					<div class="form-group col-xs-9 col-sm-6 col-md-4">
+						<label>Numero Telefonico</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control " 
+								ng-model="registro.telefono" />
+						</div>
+					</div>
+					<div class="form-group col-xs-9 col-sm-6 col-md-4">
+						<label>Anexo</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-phone-alt"></i></span> <input type="text"
+								class="form-control" ng-model="registro.anexo" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-9 col-sm-6 col-md-12">
+						<label>Direccion</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-home"></i></span> <input type="text"
+								class="form-control"
+								ng-model="registro.direccion" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-9 col-sm-6 col-md-6">
+						<label>Representante</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input type="text"
+								class="form-control" 
+								ng-model="registro.representante" />
+						</div>
+					</div>
+					<div class="form-group col-xs-9 col-sm-6 col-md-6">
+						<label>Correo Electronico</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-envelope"></i></span> <input type="text"
+								class="form-control "
+								ng-model="registro.correo" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-9 col-sm-6 col-md-12">
+						<label>Observaciones</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-unchecked"></i></span> <input type="text"
+								class="form-control "
+								ng-model="registro.observacion" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+						<label></label>
+						<button class="btn btn-primary btn-md form-control"
+							ng-click="dependencia.guardarDependencia(registro)">
+							<span class="glyphicon glyphicon-save"></span>Guardar
+						</button>
+					</div>
+					<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-light">
+						<label></label>
+						<button class="btn btn-primary btn-md form-control"
+							ng-click="dependencia.cerrarModal()">
+							<span class="glyphicon glyphicon-save"></span>Regresar
+						</button>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

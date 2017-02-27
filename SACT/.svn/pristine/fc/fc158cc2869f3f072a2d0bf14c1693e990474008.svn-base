@@ -1,0 +1,131 @@
+	appbase.service('designacionService', function($http, $rootScope){
+		return{
+			
+		}
+	});
+	
+	appbase.controller('designacionCtrl',function(viajeService,$http, $modal, $rootScope,$scope) {
+		var entorno=this;
+
+  		this.abriModalDesignacion=function(){
+  			$rootScope.modalInstance =  $modal.open({
+      			animation: true,
+      			templateUrl: 'modalFiscal.html',
+      			controller: 'fiscalModalCtrl',
+      			controllerAs: 'fiscal',
+      			size: 'lg',
+      			windowClass: 'app-modal-window',
+      			resolve: {}
+    		});
+  		};
+  		
+  		/**
+  		 * CONSULTA WS SGD CODIGO BARRA
+  		 */
+  		$rootScope.mantenedor={
+  				cbarra:"",
+  				observacion:""
+  		}
+  		
+  		$rootScope.listaCodigoBarra = {
+			    availableOptions: [{
+			    	NCodbarras:"", 
+			    	CDescSumilla:"",
+			    	CNumeroDocumento:"", 
+			    	DFechaDocumento:""}]
+			    };
+  		
+  		this.consultaDocumento = function(mantenedor) {
+  			var nuevoParametro = {cbarra : mantenedor.cbarra};
+  			$http.get("http://localhost:8080/demoseguridadbackend/resources/mantenedor/"+$rootScope.mantenedor.cbarra).then(function(response){
+  				$rootScope.listaCodigoBarra.availableOptions = response.data;
+  				console.log($rootScope.listaCodigoBarra);
+  			}, function(response){
+  				alert("error: "+response.data);
+  			});
+  		}
+  		
+  		
+  		/**
+  		 * REGISTRO PROPUESTA DESIGNACIONES
+  		 */
+  		this.registroDesignacion = function() {
+  			
+  			 $scope.rDesignacion={
+  					tipoPropuesta:$rootScope.tipoPropuesta.selectedOption.caDetId,
+  					estadoPropuesta:$rootScope.estadoPropuesta.selectedOption.caDetId,
+  					distritoFiscal:$rootScope.listaDistritoFiscal.selectedOption.codiDijuDju,
+  					
+  					codigoBarra:$rootScope.listaCodigoBarra.availableOptions[0].NCodbarras,
+  					numeroDocumento:$rootScope.listaCodigoBarra.availableOptions[0].CNumeroDocumento, 
+  					fechaDocumento:$rootScope.listaCodigoBarra.availableOptions[0].DFechaDocumento,
+  					sumilla:$rootScope.listaCodigoBarra.availableOptions[0].CDescSumilla,
+  					
+  					observacion:""
+  				};
+  			
+  			console.log($scope.rDesignacion);
+  		}
+  		
+		
+	});
+	
+	appbase.controller('fiscalModalCtrl',function ($modalInstance,$rootScope,$scope,$location,$http,$modal) {
+		var entorno2 = this;
+		var entorno4 = $scope;
+		
+		$scope.tPropuesta=$rootScope.tipoPropuesta.selectedOption.caDetId;
+		
+		$rootScope.estadoFiscal = {
+				availableOptions : [ {
+					caDetId : "1",
+					caDesc : "Propuesto"
+				}, {
+					caDetId : "2",
+					caDesc : "Designado"
+				} ],
+				selectedOption : {
+					caDetId : '1',
+					caDesc : 'Propuesto'
+				}
+			};
+		
+		this.agregar = function(mantenedor2) {
+			swal({
+				   title: "CONFIRMACION",
+				   text: "Esta seguro que desea agregar",
+				   showCancelButton: true,
+				   confirmButtonText: "Aceptar"
+				   }, 
+				   function(isConfirm){
+					   if (isConfirm) { 
+						   var nuevoDel = { 
+									  deNombre:registro.nombre,
+									  deTelefono:registro.telefono,
+									  deAnexo:registro.anexo,
+									  deRepresentante:registro.representante,
+									  deObservacion:registro.observacion
+									  };
+							  console.log(nuevoDel);
+							  parametroService.registrarDependencia(nuevoDel).then(function(respuesta){
+				  					$rootScope.modalInstance.close('cerrar');
+				  					growl.addInfoMessage("REGISTRO CORRECTO :"+respuesta.mensaje);
+				  				}, function(respuesta){
+				  					growl.addInfoMessage("ERROR REGISTRAR :"+respuesta.mensaje);
+				  				});
+					   } else {
+						   console.log("cerrado");
+					   }
+				});	
+			};
+		
+		this.cerrarModal = function () {
+			console.log("cerrar modal actualizar");
+			$rootScope.modalInstance.close({
+      			animation: true,
+      			size: 'lg',	
+      			resolve: {}
+    		});
+		};
+			
+	});

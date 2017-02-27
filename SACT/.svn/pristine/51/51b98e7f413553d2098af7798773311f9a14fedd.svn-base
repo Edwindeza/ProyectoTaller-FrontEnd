@@ -1,0 +1,76 @@
+<div growl></div>
+<style>
+.panel-body{
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+}
+</style>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 align="center">PARAMETROS GENERALES</h4>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header  col-md-offset-2">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3 col-md-offset-2">
+							<select style="height: 30px;" class="form-control" name="idOrigen" ng-model="listaTodoTipo.selectedOption" ng-options="item.caDesc for item in listaTodoTipo.availableOptions track by item.caDesc"  ng-click="parametro.consultaTipo()" >
+							</select>
+						</div>
+						<div class="clearfix"></div> 
+					</div>
+				</div>
+			</div>
+		</div> 
+	<div class="col-md-8  col-md-offset-2"  >
+		<ul class="list-group" >
+			<li class="list-group-item  bloque-titulo active">
+				<div class="pull-left"><h4>Lista Parametros</h4></div>
+				<div class="clearfix"></div> 
+			</li>
+			<li class="list-group-item ">
+				<div class="row">
+							<div class="form-group col-xs-9 col-sm-6 col-md-6 col-md-offset-1">
+								<div class="input-group">
+    								<span class="input-group-addon"><i class=" glyphicon glyphicon-pencil"></i></span>
+    								<input type="text" class="form-control"  ng-model="mantenedor.caDesc" placeholder="Descripcion" enabled />
+  								</div>
+							</div>
+							<div class="form-group col-xs-9 col-sm-6 col-md-4 pull-right">
+								<button class="btn btn-primary btn-md form-control" ng-click="parametro.agregar(mantenedor)" ng-disabled="mantenedor.$invalid" ><span class="glyphicon glyphicon-plus"></span>Agregar</button>	
+							</div>
+				</div>
+			</li>
+			<li class="list-group-item">
+				<table id="tablaParametros"  class="table table-condensed table-hover table-responsive" style="font-size:12px;cursor:pointer;">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Descripcion</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-class="{'selected':$index == selectedRowINPE}" ng-repeat="item2 in listaTablaTipo.availableOptions"   ng-click="setearClicFilaINPE($index)"  >  
+							<td>{{item2.caDetId}}</td>
+							<td>{{item2.caDesc}}</td>
+							<td>
+							<button ng-click="parametro.editar(listaTablaTipo.availableOptions,item2)"  class="btn btn-success btn-xs "><span class="glyphicon glyphicon-pencil"></span></button>
+							</td>
+							<td>
+							<button ng-click="parametro.eliminar(listaTablaTipo.availableOptions,item2)"  class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-trash"></span></button>
+							</td>
+						</tr> 
+					</tbody>
+				</table>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>	

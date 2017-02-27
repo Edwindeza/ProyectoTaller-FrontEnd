@@ -1,0 +1,143 @@
+<div growl></div>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h5>COMISIONADOS</h5>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Nombres</label> 
+							<input type="text" class="form-control input-sm" id="coNombre"  ng-model="coMantenedor.coNombre" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Apellido Paterno</label> 
+							<input type="text" class="form-control input-sm" id="coPaterno"  ng-model="coMantenedor.coPaterno"/>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Apellido Materno</label> 
+							<input type="text" class="form-control input-sm" id="coMaterno" ng-model="coMantenedor.coMaterno" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3 ">
+							<label>Distrito Fiscal</label> 
+							<input type="text" class="form-control input-sm" ng-model="coMantenedor.coDistrito" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-2">
+							<label>Con Goce</label> 
+							<select style="height: 30px;" class="form-control" name="idOrigen" ng-model="viaje.origen" ng-options="item.id  as item.name for item in origen" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-2">
+							<label>Irroga Gastos</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="viaje.tipo" ng-options="item.id  as item.name for item in tipoResolucion" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-4">
+							<label>Pasajes</label> 
+							<input type="text" class="form-control input-sm" id="deFnaci" ng-model="coMantenedor.coPasaje" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-4">
+							<label>Seguro</label> 
+							<input type="text" class="form-control input-sm" id="coSeguro" ng-model="coMantenedor.coSeguro"  />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-4">
+							<label>Viaticos</label> 
+							<input type="text" class="form-control input-sm" id="coViatico" ng-model="coMantenedor.coViatico"  />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-4">
+							<label>Tralados</label> 
+							<input type="text" class="form-control input-sm" id="coTraslado" ng-model="coMantenedor.cotraslado"  />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-4">
+							<label>Otros Gastos</label> 
+							<input type="text" class="form-control input-sm" id="coOtro" ng-model="coMantenedor.coOtro" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="col-md-12">
+		<ul class="list-group" >
+			<li class="list-group-item  bloque-titulo">
+				<div class="pull-left"><h4>Comisionados</h4></div>
+				<div class="form-group col-xs-9 col-sm-6 col-md-2 pull-right">
+				<button class="btn btn-primary btn-md form-control" ng-click="agregarDelitos(coMantenedor)"><span class="glyphicon glyphicon-plus"></span>Agregar</button>	
+				</div>
+				<div class="clearfix"></div> 
+			</li>
+			<li class="list-group-item">
+				<table id="registrosINPE"  class="table table-condensed table-hover table-responsive" style="font-size:12px;cursor:pointer;">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Ape Paterno</th>
+							<th>Ape Materno</th>
+							<th>Distrito Fiscal</th>
+							<th>Goce</th>
+							<th>Irroga</th>
+							<th>Pasaje</th>
+							<th>Seguro</th>
+							<th>Viaticos</th>
+							<th>Traslado</th>
+							<th>Otros</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody  ng-repeat="item in lstDelitos" class="animate-repeat-item">
+							<tr>
+								<td>{{item.nombre}}</td>
+								<td>{{item.paterno}}</td>
+								<td>{{item.materno}}</td>
+								<td>{{item.distrito}}</td>
+								<td>{{item.goce}}</td>
+								<td>{{item.irroga}}</td>
+								<td>{{item.pasaje}}</td>
+								<td>{{item.seguro}}</td>
+								<td>{{item.viatico}}</td>
+								<td>{{item.traslado}}</td>
+								<td>{{item.otro}}</td>
+								<td>{{item.total}}</td>
+								<td><button ng-click="deleteDelito(lstDelitos,item)"  class="btn btn-danger btn-xs">Eliminar</button></td>
+								
+							</tr>
+						</tbody>
+				</table>
+			</li>
+		</ul>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+							<button class="btn btn-danger btn-md form-control" ng-click="viaje.agregar()"><span class="glyphicon glyphicon-saved"></span>Guardar</button>	
+						</div>
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-left">
+							<button class="btn btn-success btn-md form-control" ng-click="cerrarModal()"><span class="glyphicon glyphicon-log-out"></span>Cerrar</button>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

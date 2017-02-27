@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='appbase'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SIGESTRA</title>
+
+<link href="recursos/css/bootstrap/bootstrap.css" rel="stylesheet">
+<link href="recursos/css/dashboard.css" rel="stylesheet" media="screen">
+<link href="recursos/css/estilosPrincipal.css" rel="stylesheet"
+	media="screen">
+<link rel="stylesheet"
+	href="componentes/angular-complete/angucomplete.css" />
+<link rel="stylesheet"
+	href="componentes/node_modules/angular-material/angular-material.css" />
+<link rel="stylesheet"
+	href="componentes/angular-complete/angucomplete.css" />	
+<link rel="stylesheet"
+	href="componentes/angular-table/md-data-table.min.css" />
+<link rel="stylesheet"
+	href="componentes/angular-growl/angular-growl.css" />
+	
+<link rel="stylesheet" href="recursos/css/sweetalert.css"
+	type="text/css" />
+<link rel="stylesheet" href="recursos/css/bootstrap-timepicker.css"
+	type="text/css" />
+
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+<link rel="stylesheet"
+	href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">
+
+<script src="recursos/js/sweetalert.min.js"></script>
+
+
+
+<script src="componentes/node_modules/angular/angular.min.js"></script>
+<script src="componentes/node_modules/angular-aria/angular-aria.js"></script>
+<script src="componentes/node_modules/angular-animate/angular-animate.js"></script>
+<script src="componentes/node_modules/angular-material/angular-material.js"></script>
+<script src="componentes/angular-locale/angular-locale_es-pe.js"></script>
+<script src="componentes/angular-route/angular-route.min.js"></script>
+<script src="componentes/ui-bootstrap/ui-bootstrap.min.js"></script>
+<script src="componentes/satellizer/satellizer.min.js"></script>
+<script src="componentes/angular-complete/angucomplete.js"></script>
+<script src="componentes/angular-complete/angucomplete-alt.js"></script>
+<script src="componentes/angular-growl/angular-growl.js"></script>
+
+<script src="componentes/angular-table/md-data-table.min.js"></script>
+
+
+
+
+
+
+<script src="appbase.js"></script>
+<script src="controladores/loginCtrl.js"></script>
+<script src="controladores/resoluciones/viajeCtrl.js"></script>
+<script src="controladores/resoluciones/consultaCtrl.js"></script>
+<script src="controladores/resoluciones/representanteCtrl.js"></script>
+<script src="controladores/resoluciones/parametro/parametroCtrl.js"></script>
+<script src="controladores/resoluciones/parametro/dependenciaCtrl.js"></script>
+<script src="controladores/oficio/designacion/designacionCtrl.js"></script>
+<script src="controladores/oficio/designacion/consultaDesignacionCtrl.js"></script>
+<script src="controladores/tramite/tramiteCtrl.js"></script>
+<script src="controladores/tramite/consultaTramiteCtrl.js"></script>
+<script src="controladores/tramite/buscarTramiteCtrl.js"></script>
+<script src="controladores/tramite/solicitarTramiteCtrl.js"></script>
+<script src="controladores/tramite/misTramitesCtrl.js"></script>
+<script src="controladores/tramite/misMovimientosCtrl.js"></script>
+<script src="controladores/mantenimiento/nuevoUsuarioCtrl.js"></script>
+
+
+<script src="controladores/DemoCtrl.js"></script>
+
+
+</head>
+
+<body ng-controller='globalCtrl'>
+	<div ng-controller="DemoCtrl as ctrl" ng-cloak>
+		<md-content id="md-content-Principal" md-theme="docs-dark" layout-gt-sm="row" layout-align="center center" layout-padding>
+				<div>
+					<h2 class="md-toolbar-tools">
+					<span>SISTEMA DE TRAMITE DOCUMENTARIO</span>
+					</h2>
+				</div>
+		</md-content>
+		<md-toolbar class="md-menu-toolbar" ng-if="validarMenu==true"> 
+		<div layout="row" > 
+			<md-toolbar-filler layout layout-align="center center">
+			<md-icon md-svg-icon="call:chat"></md-icon> </md-toolbar-filler>
+			<div>
+				<h2 class="md-toolbar-tools">UNMSM-FISI</h2>
+				<md-menu-bar> 
+					<md-menu>
+					<button ng-click="$mdOpenMenu()">Gestion Tramite</button>
+							<md-menu-content> 
+								<md-menu-item> <md-button ng-click="ctrl.sampleAction('consulta', $event)">Consulta</md-button> </md-menu-item> 
+								<md-menu-divider></md-menu-divider>
+								<md-menu-item> 
+									<md-menu> 
+										<md-button  ng-click="$mdMenu.open()">Nuevo</md-button> 
+											<md-menu-content>
+												<md-menu-item> <md-button 
+													ng-click="ctrl.sampleAction('nuevo', $event)">Tramite</md-button></md-menu-item>
+												<md-menu-item> <md-button
+													ng-click="ctrl.sampleAction('New Spreadsheet', $event)">Spreadsheet</md-button></md-menu-item>
+												<md-menu-item> <md-button
+													ng-click="ctrl.sampleAction('New Presentation', $event)">Presentation</md-button></md-menu-item>
+												<md-menu-item> <md-button
+													ng-click="ctrl.sampleAction('New Form', $event)">Form</md-button></md-menu-item> <md-menu-item>
+												<md-button ng-click="ctrl.sampleAction('New Drawing', $event)">Drawing</md-button></md-menu-item>
+											</md-menu-content> 
+									</md-menu> 
+								</md-menu-item> 
+								<!-- <md-menu-item> 
+									<md-button ng-click="ctrl.sampleAction('BuscarTramite', $event)"> Busca Tramite<span class="md-alt-text"> {{ 'M-O' | keyboardShortcut }}</span> </md-button> 
+								</md-menu-item>  -->
+								<md-menu-item>
+									<md-button disabled="disabled" ng-click="ctrl.sampleAction('Rename', $event)"> Rename </md-button> 
+								</md-menu-item> 
+								<md-menu-divider></md-menu-divider> 
+								<md-menu-item>
+									<md-button ng-click="ctrl.sampleAction('Print', $event)"> Print <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span> </md-button> 
+								</md-menu-item> 
+							</md-menu-content> 
+					</md-menu>
+					<md-menu>
+					<button ng-click="$mdOpenMenu()">Tramite</button>
+						<md-menu-content> 
+							<md-menu-item><md-button ng-click="ctrl.sampleAction('BuscarTramite', $event)">Buscar Tramite</md-button></md-menu-item>
+							<md-menu-divider></md-menu-divider>
+							<md-menu-item><md-button ng-click="ctrl.sampleAction('misTramites', $event)">Mis Tramites</md-button></md-menu-item>
+						</md-menu-content>
+					</md-menu>
+					<md-menu>
+					<button ng-click="$mdOpenMenu()">Movimiento Tramite</button>
+						<md-menu-content> 
+							<md-menu-item><md-button ng-click="ctrl.sampleAction('misMovimientos', $event)">Mis Movimientos</md-button></md-menu-item>
+						</md-menu-content> 
+					</md-menu>
+					 
+					<md-menu>
+					<button ng-click="$mdOpenMenu()">Mantenimiento</button>
+						<md-menu-content> 
+							<md-menu-item type="checkbox" ng-click="ctrl.sampleAction('nuevoUsuario', $event)">Nuevo Usuario</md-menu-item> 
+							<md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler </md-menu-item> 
+							<md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar </md-menu-item> 
+							<md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions </md-menu-item> 
+							<md-menu-divider></md-menu-divider> 
+							<md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls </md-menu-item> 
+							<md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen </md-menu-item> 
+						</md-menu-content> 
+					</md-menu> 
+					
+				</md-menu-bar>
+			</div>
+		</div>
+	</md-toolbar>
+</div>
+<div id="container-fluid">
+		<div ng-view></div>
+</div>
+	<!-- 
+	<header>
+		<div class="container">
+			<figure class="fisi-logo-container pull-left">
+				<a href="http://sistemas.unmsm.edu.pe"><img
+					class="fisi-logo img-responsive"
+					src="recursos/img/logo_fisi_unmsm.png"
+					alt="Logotipo de la Facultad de Ingeniería de Sistemas e Informática - Enlace al home de La página"></a>
+			</figure>
+		</div>
+	</header> -->
+
+
+	<!-- <nav class="navbar navbar-default navbar-inner">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Guia de navegacion</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Inicio</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li dropdown><a href="#" dropdown-toggle>Modulo Tramite<b
+							class="caret"></b></a>
+						<ul class="dropdown-menu" role="menu"
+							aria-labelledby="dropdownMenu">
+							<li role="menuitem"><a href="#/tramite">Registro tramite</a></li>
+							<li role="menuitem"><a href="#/consultaTramite">Consulta
+									Tramite</a></li>
+							<li class="divider"></li>
+							<li role="menuitem"><a href="#/consulta">CONSULTA</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-submenu"><a href="#">SEGUIMIENTO</a>
+								<ul class="dropdown-menu" role="menu">
+									<li role="menuitem"><a href="#/viajeSeguimiento">Resolución-Viaje
+											al Exterior</a></li>
+									<li role="menuitem"><a href="#/representanteSeguimiento">Resolución-Representantes
+											del MP</a></li>
+									<li role="menuitem"><a href="#/ampliacionSeguimiento">Resolución-Ampliación
+											de Competencias</a></li>
+									<li role="menuitem"><a href="#/representante">Reportes</a></li>
+								</ul></li>
+							<li class="divider"></li>
+							<li class="dropdown-submenu"><a href="#">PARÁMETROS</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a tabindex="-1" href="#/general">General</a></li>
+									<li><a tabindex="-1" href="#/dependencia">Dependencia</a></li>
+									<li><a tabindex="-1" href="#">Numeracion</a></li>
+									<li><a tabindex="-1" href="#">Responsable</a></li>
+								</ul></li>
+							<li class="divider"></li>
+							<li class="dropdown-submenu"><a href="#">OFICIO</a>
+								<ul class="dropdown-menu" role="menu">
+									<li class="dropdown-submenu"><a href="#">Designacion</a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a tabindex="-1" href="#consultaDesignacion">Consulta</a></li>
+											<li><a tabindex="-1" href="#registroDesignacion">Nuevo</a></li>
+										</ul></li>
+									<li class="divider"></li>
+								</ul></li>
+							<li class="divider"></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav> -->
+
+
+	<!-- <footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-3">
+					<nav>
+						<ul class="list-unstyled">
+							<li><h2>LA FACULTAD</h2></li>
+							<li><a href="/sistemas">EP Ingeniería de Sistemas</a></li>
+							<li><a href="/software">EP Ingeniería de Software</a></li>
+							<li><a href="/posgrado">Posgrado</a></li>
+							<li><a href="/ceups">CERSEU</a></li>
+							<li><a href="/unidad/occa">OCCA</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<div class="col-xs-12 col-sm-3">
+					<nav>
+						<ul class="list-unstyled">
+							<li><h2>SERVICIOS UNIVERSITARIOS</h2></li>
+							<li><a target="_blank" href="http://sisbib.unmsm.edu.pe">Sistema
+									de Bibliotecas</a></li>
+							<li><a target="_blank" href="http://unmsm.edu.pe/occaa">Calidad
+									Académica OCCA</a></li>
+							<li><a target="_blank" href="http://ccsm-unmsm.edu.pe">Centro
+									Cultural</a></li>
+							<li><a target="_blank" href="http://clinica.unmsm.edu.pe">Clínica
+									Universitaria</a></li>
+							<li><a target="_blank" href="http://ogbu.unmsm.edu.pe">Bolsa
+									de trabajo</a></li>
+						</ul>
+					</nav>
+				</div>
+
+				<div class="col-xs-12 col-sm-3">
+					<nav>
+						<ul class="list-unstyled">
+							<li><h2>SERVICIOS AL ESTUDIANTE</h2></li>
+							<li><a href="/unidad/unayoe">UNAYOE</a></li>
+							<li><a href="/unidad/bienstar">Unidad de Bienestar</a></li>
+							<li><a href="/bolsa-de-trabajo">Bolsa de Trabajo</a></li>
+							<li><a href="/biblioteca">Biblioteca</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="hidden-xs col-xs-12 col-sm-3">
+					<video class="hidden-xs"
+						style="width: 90%; padding-top: 30px; margin-left: 10%"
+						src="../../../Amp60.mp4" controls=""
+						poster="/assets/fisi/img/nuevosis.jpg"></video>
+				</div>
+
+				<div class="col-xs-12">
+					<div class="pull-right"></div>
+				</div>
+
+				<div class="col-xs-12">
+					<address class="text-right">
+						<i class="glyphicon glyphicon-map-marker"></i> Ciudad
+						Universitaria - Av. Germán Amézaga<br> <i
+							class=" glyphicon glyphicon-earphone"></i> Teléfono: 619 - 7000
+						Anexo 3632<br> <a href="mailto:informatica.fisi@unmsm.edu.pe"><i
+							class="glyphicon glyphicon-envelope"></i>
+							informatica.fisi@unmsm.edu.pe</a>
+					</address>
+				</div>
+			</div>
+		</div>
+	</footer> -->
+</body>
+</html>

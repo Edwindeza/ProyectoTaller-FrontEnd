@@ -1,0 +1,56 @@
+body {
+    font-size: 12px;
+}
+.cuadro-redondeado{
+	border-style: solid;
+	border-color: #ddd;
+	border-radius: 4px 4px 4px 4px;
+	border-width: 1px;
+	box-shadow: none;
+	padding: 0px 15px 15px 15px;
+	margin-bottom: 5px;
+}
+.bloque-titulo{
+	/*color: #fff;*/
+	font-size: 16px;
+	/*background-color:#0099cc;*/
+	padding:5px 10px;
+	border-bottom: solid #ddd 1px;
+	font-weight: bold;
+}
+.navbar-inner{
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.176);
+}
+.cajatab{
+	border-style: solid;
+	border-color: #ddd;
+	border-radius: 3px;
+	border-width: 1px;
+
+	border-top: medium none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 5px;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 2px 5px;
+}
+.form-group {
+    margin-bottom: 5px;
+}
+.input-sm {
+    border-radius: 3px;
+    font-size: 12px;
+    height: 24px;
+    line-height: 1.5;
+    padding: 0px 10px;
+}
+.form-horizontal .control-label {
+    margin-bottom: 0;
+    padding-top: 2px;
+    text-align: right;
+}

@@ -1,0 +1,94 @@
+<div growl></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 align="center">CREACION DE RESOLUCIONES - OTRAS</h4>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Origen</label> 
+							<select style="height: 30px;" class="form-control" name="idOrigen" ng-model="origen.selectedOption" ng-options="item.caDesc for item in origen.availableOptions track by item.caDesc" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Resolucion</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="tipoResolucion.selectedOption" ng-options="item.caDesc for item in tipoResolucion.availableOptions track by item.caDesc" readonly />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3
+						">
+								<label>Fecha Firma</label> 
+								<div class="input-group">
+								<input type="text" class="form-control input-sm" datepicker-popup="{{viaje.format}}" ng-model="viajeReg.fFirma" is-open="viaje.calendarioAbierto" datepicker-options="viaje.dateOptions" ng-required="true" close-text="Cerrar" readonly />
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="viaje.abrirCalendario($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+								</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Nro Resolucion</label> 
+							<input type="text"
+								class="form-control input-sm" id="viajeNumero" ng-model="viajeReg.nroResolucion" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Creacion</label> 
+							<input type="text" class="form-control input-sm" id="viajeFechaCreacion" ng-model="viajeReg.fcreacion" readonly/>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado Resolucion</label> 
+							<input type="text" class="form-control input-sm" id="viajeNumero" ng-model="viajeReg.eResolucion.nombre" readonly />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Responsable SG</label>
+							<select style="height: 30px;" class="form-control" name="deDatos" ng-model="detMantenedor.deDatos" ng-options="item.id  as item.name for item in datos" required>							
+							<option value="Fiorella Arteaga">Fiorella Arteaga</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+							<button class="btn btn-danger btn-md form-control" ng-click="registrarDatos()"><span class="glyphicon glyphicon-saved"></span>Guardar</button>	
+						</div>
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-left">
+							<button class="btn btn-success btn-md form-control" ng-click="viaje.regresar()"><span class="glyphicon glyphicon-log-out"></span>Regresar</button>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/ng-template" id="modalComisionado.html">
+	<div class="include" ng-include="'vistas/resoluciones/viaje/modalComisionado.html'">
+	</div>
+</script>

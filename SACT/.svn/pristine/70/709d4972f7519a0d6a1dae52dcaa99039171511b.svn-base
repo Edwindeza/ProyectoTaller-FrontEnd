@@ -1,0 +1,234 @@
+	appbase.service('representanteService', function($http, $rootScope){
+		return{
+		}
+	});
+	
+	appbase.controller('representanteCtrl',function(representanteService,$http, $modal, $rootScope,$scope) {
+		var entorno=this;
+		var entorno3=$scope;
+		
+		$rootScope.repreRegistro={
+				nro:"",
+				tipo:"",
+				fcreacion:""
+		};
+		
+		/**
+		 * Calculo de nro Resolucion
+		 */
+		var factual=new Date();
+		fdia=factual.getDate();
+		fmes=((factual.getMonth() + 1) < 10 ? '0' : '') + (factual.getMonth() + 1);
+		faño=factual.getFullYear();
+		var total=fdia+"-"+faño+"-MP-FN";
+		$rootScope.repreRegistro.nro=total;
+		//fin
+		
+		$rootScope.repreRegistro.tipo="Representantes del MP";
+		$rootScope.repreRegistro.fcreacion=fdia+"/"+fmes+"/"+faño;
+		
+  	    /**
+  	     * Inicio Calendario
+  	     */
+		entorno.calendarioAbierto = false;
+		entorno.calendarioAbierto2 = false;
+		entorno.formats = ['dd/MM/yyyy','dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		entorno.format = entorno.formats[0];
+
+		this.abrirCalendario = function($event) {
+			console.log("entro");
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto = true;
+  		};
+
+  		this.abrirCalendario2 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno.calendarioAbierto2 = true;
+  		};
+  		
+  		entorno.dateOptions = {
+    		formatYear: 'yyyy',
+    		startingDay: 1
+  		};
+  		//fin Calendario
+  		
+  		
+  		
+  		this.abriModalComision=function(){
+  			console.log("entro MODAL COMISION");
+  			var modalInstance =  $modal.open({
+      			animation: true,
+      			templateUrl: 'modalComision.html',
+      			controller: 'comisionModalCtrl',
+      			controllerAs: 'comision',
+      			size: 'lg',	
+      			resolve: {}
+    		});
+  		};
+  		
+		
+	});
+	
+	appbase.controller('comisionModalCtrl',function ($modalInstance,$modal, $rootScope,$scope) {
+		var entorno2 = $scope;
+		var entorno4 = this;
+		
+		$rootScope.coMantenedor={ 
+	  			tipo:"",
+	  			subtipo:"",
+	  			nombre:"",
+	  			objeto:"",
+	  			fecha:"",
+	  			plazo:"",
+	  			caracter:"",
+	  			institucion:"",
+	  			sistema:"",
+	  			materia:"",
+	  			submateria:"",
+	  			ambitoI:"",
+	  			ambitoJ:""
+	  	};
+		
+		//AGREGAR DELITOS
+		$scope.lstComisiones = []; 
+		$scope.agregarComisiones = function(coMantenedor) {
+				  console.log("ENTRO A AGREGAR COMISION");
+				  var nuevoComi = { tipo:coMantenedor.tipo,
+						  		   subtipo:coMantenedor.subtipo,
+						  		   nombre:coMantenedor.nombre,
+						  		   objeto:coMantenedor.objeto,
+						  		   fecha:coMantenedor.fecha,
+						  		   plazo:coMantenedor.plazo,
+						  		   caracter:coMantenedor.caracter,
+						  		   institucion:coMantenedor.institucion,
+						  		   sistema:coMantenedor.sistema,
+						  		   materia:coMantenedor.materia,
+						  		   submateria:coMantenedor.submateria,
+						  		   ambitoI:coMantenedor.ambitoI,
+						  		   ambitoJ:coMantenedor.ambitoJ
+						  		   };
+				  
+				  $scope.lstComisiones.push(nuevoComi); 
+				 
+			};
+			
+		$scope.deleteDelito = function(lstComisiones,item) {
+				  lstComisiones.splice(lstComisiones.indexOf(item), 1);
+			};
+			
+		entorno2.cerrarModal = function () {
+				console.log("cerrar modal actualizar");
+				$rootScope.modalInstance.close('cerrar');
+			};
+			
+		$rootScope.tipoComision={
+					   availableOptions:[
+				                   {id: 1, name:'Comision de Trabajo'}, 
+				                   {id: 2, name:'Grupo de Trabajo'}, 
+				                   {id: 3, name:'Equipo de Trabajo'},
+				                   {id: 4, name:'Comite'},
+				                   {id: 5, name:'Mesa Trabajo'}
+				                   ],
+				       selectedOption: {id: '1', name: 'Comision de Trabajo'}
+									};
+		
+		$rootScope.SubtipoComision={
+				   availableOptions:[
+			                   {id: 1, name:'Conformacion'}, 
+			                   {id: 2, name:'Reconformacion'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Conformacion'}
+								};
+		
+		$rootScope.sistema={
+				   availableOptions:[
+			                   {id: 1, name:'Fiscal'}, 
+			                   {id: 2, name:'Administrativo'},
+			                   {id: 3, name:'Medicina Legal'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Fiscal'}
+								};
+		
+		$rootScope.materia={
+				   availableOptions:[
+			                   {id: 1, name:'Penal'}, 
+			                   {id: 2, name:'Civil'},
+			                   {id: 3, name:'Familia'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Penal'}
+								};
+		
+		$rootScope.subsistema={
+				   availableOptions:[
+			                   {id: 1, name:'Tributario'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Tributario'}
+								};
+		
+		$rootScope.caracter={
+				   availableOptions:[
+			                   {id: 1, name:'Temporal'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Temporal'}
+								};
+		
+		$rootScope.institucion={
+				   availableOptions:[
+			                   {id: 1, name:'Ministerio Publico'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Ministerio Publico'}
+								};
+		
+		$rootScope.ambitoInstitucional={
+				   availableOptions:[
+			                   {id: 1, name:'Interno'},
+			                   {id: 2, name:'Externo'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Interno'}
+								};
+		
+		$rootScope.ambitoJuridiccional={
+				   availableOptions:[
+			                   {id: 1, name:'Nacional'},
+			                   {id: 2, name:'Distrital'}
+			                   ],
+			       selectedOption: {id: '1', name: 'Nacional'}
+								};
+		
+		
+		
+		 /**
+  	     * Inicio Calendario
+  	     */
+		entorno4.calendarioAbierto = false;
+		entorno4.calendarioAbierto2 = false;
+		entorno4.formats = ['dd/MM/yyyy','dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		entorno4.format = entorno4.formats[0];
+
+		this.abrirCalendario = function($event) {
+			console.log("entro MFECHA MODAL");
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno4.calendarioAbierto = true;
+  		};
+
+  		this.abrirCalendario2 = function($event) {
+    		$event.preventDefault();
+    		$event.stopPropagation();
+    		entorno4.calendarioAbierto2 = true;
+  		};
+  		
+  		entorno4.dateOptions = {
+    		formatYear: 'yyyy',
+    		startingDay: 1
+  		};
+  		//fin Calendario
+		
+		
+		
+		
+		
+	});
+	

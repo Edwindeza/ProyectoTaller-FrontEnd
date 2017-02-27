@@ -1,0 +1,23 @@
+
+<!-- 
+<br>
+<div style="width:300px" class="center-block">
+	<div class="cuadro-redondeado">
+		<h3>Ingresar</h3>		
+		<form action="#carpetasAsistencia">
+			<div class="form-group">
+				<label for="dni" class="sr-only">DNI:</label>
+				<input type="text" class="form-control" id="dni" ng-model="login.dni" placeholder="DNI:">
+			</div>
+			<div class="form-group">
+				<label for="password" class="sr-only">Password:</label>
+				<input type="password" class="form-control" id="password" ng-model="login.password" placeholder="Password:">
+			</div>
+			<button class="btn btn-primary" ng-click="login.nuevoModal()">Iniciar Session</button>
+		</form>
+	</div>
+</div>
+
+	
+<br>
+ -->

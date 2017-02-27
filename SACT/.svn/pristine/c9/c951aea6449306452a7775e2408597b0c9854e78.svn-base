@@ -1,0 +1,179 @@
+<div growl></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 align="center">REGISTRO DE PROPUESTAS DE DESIGNACION DE
+			FISCALES/FUNCIONARIOS</h4>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box  ">
+			<div class="widget-header col-md-offset-1">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Distrito Fiscal</label> <select style="height: 24px;"
+								class="form-control" name="idTipo"
+								ng-model="listaDistritoFiscal.selectedOption"
+								ng-options="item.descDijuDju for item in listaDistritoFiscal.availableOptions track by item.descDijuDju" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo de Propuesta</label> <select style="height: 24px;"
+								class="form-control" name="idTipo"
+								ng-model="tipoPropuesta.selectedOption"
+								ng-options="item.caDesc for item in tipoPropuesta.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado de la Propuesta</label> <select
+								style="height: 24px;" class="form-control" name="idTipo"
+								ng-model="estadoPropuesta.selectedOption"
+								ng-options="item.caDesc for item in estadoPropuesta.availableOptions track by item.caDesc" />
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Numero Propuesta</label> <input type="text"
+								class="form-control input-sm" id="viajeNumero" ng-model=""
+								readonly />
+						</div>
+					</div>
+					<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>C&oacutedigo Barra</label>
+							<div class="input-group">
+								<input type="text" class="form-control input-sm " ng-model="mantenedor.cbarra" > <span class="input-group-btn">
+								<button class="btn btn-primary" type="submit" ng-click="designacion.consultaDocumento(mantenedor)"> <i class="glyphicon glyphicon-search"></i></button>
+								</span>
+							</div>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Numero Documento</label> <input type="text"
+								class="form-control input-sm"
+								ng-model="listaCodigoBarra.availableOptions[0].CNumeroDocumento" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Documento</label> <input type="text"
+								class="form-control input-sm"
+								ng-model="listaCodigoBarra.availableOptions[0].DFechaDocumento" readonly />
+						</div>
+					</div>
+				</div>
+				<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+					<div class="form-group col-xs-9 col-sm-6 col-md-12">
+						<label>Sumilla</label> <input type="text"
+							class="form-control input-sm" ng-model="listaCodigoBarra.availableOptions[0].CDescSumilla"
+							readonly />
+					</div>
+				</div>
+				<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+					<div class="form-group col-xs-9 col-sm-6 col-md-12">
+						<label>Observaci&oacuten</label> <input type="text"
+							class="form-control input-sm" ng-model="mantenedor.observacion" />
+					</div>
+				</div>
+				<div class="row col-xs-9 col-sm-6 col-md-10 col-md-offset-1">
+					<div class="form-group col-xs-9 col-sm-6 col-md-12">
+						<label></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<ul class="list-group">
+		<li class="list-group-item-info  bloque-titulo">
+			<div class="pull-left">
+				<h4>Fiscales</h4>
+			</div>
+			<div class="form-group col-xs-9 col-sm-6 col-md-2 pull-right">
+				<button class="btn btn-primary btn-md form-control"
+					ng-click="designacion.abriModalDesignacion()">
+					<span class="glyphicon glyphicon-plus"></span>Agregar
+				</button>
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li class="list-group-item">
+			<table id="registrosINPE"
+				class="table table-condensed table-hover table-responsive"
+				style="font-size: 12px; cursor: pointer;">
+				<thead>
+					<tr>
+						<th>Apellido Paterno</th>
+						<th>Apellido Materno</th>
+						<th>Nombres</th>
+						<th>Fiscalia</th>
+						<th>Cargo Propuesto</th>
+						<th>Estado</th>
+						<th>Nro. Resoluci&oacuten</th>
+						<th>Fecha Resoluci&oacuten</th>
+						<th>Observaci&oacuten</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- 
+					<tr>
+						<td>PERALTA</td>
+						<td>ZAMORA</td>
+						<td>CYNTHIA DEL SOCORRO</td>
+						<td>2da FISCALIA PROVINCIAL PENAL CORPORATIVA DE PIURA</td>
+						<td>FISCAL ADJUNTO PROVINCIAL PROVISIONAL</td>
+						<td>PROPUESTO</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<button ng-click="designacion.abriModalDesignacion()"
+								class="btn btn-primary btn-xs">Editar</button>
+						</td>
+					</tr>
+					<tr>
+						<td>ONTANEDA</td>
+						<td>ZAPATA</td>
+						<td>MARCO IDELFONSO</td>
+						<td>2da FISCALIA PROVINCIAL PENAL CORPORATIVA DE PIURA</td>
+						<td>FISCAL ADJUNTO PROVINCIAL PROVISIONAL</td>
+						<td>PROPUESTO</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<button ng-click="designacion.abriModalDesignacion()"
+								class="btn btn-primary btn-xs">Editar</button>
+						</td>
+					</tr>
+				 -->
+				</tbody>
+			</table>
+		</li>
+	</ul>
+	<div class="widget-box">
+		<div class="widget-body">
+			<div class="widget-main">
+				<div class="row">
+					<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+						<button class="btn btn-danger btn-md form-control"
+							ng-click="designacion.registroDesignacion()">
+							<span class="glyphicon glyphicon-saved"></span>Guardar
+						</button>
+					</div>
+					<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-left">
+						<button class="btn btn-success btn-md form-control"
+							ng-click="designacion.registroDesignacion()">
+							<span class="glyphicon glyphicon-log-out"></span>Regresar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script type="text/ng-template" id="modalFiscal.html">
+	<div class="include" ng-include="'vistas/oficio/designacion/modalFiscal.html'">
+	</div>
+</script>

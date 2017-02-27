@@ -1,0 +1,288 @@
+<div growl></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 align="center">CREACION DE RESOLUCION DE AMPLIACION DE COMPETENCIAS</h4>
+	</div>
+	<div class="panel-body">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h4 class="widget-title">Datos Generales</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Origen</label> 
+							<select style="height: 30px;" class="form-control" name="idOrigen" ng-model="origen.selectedOption" ng-options="item.caDesc for item in origen.availableOptions track by item.caDesc" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo Resolucion</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="tipoResolucion.selectedOption" ng-options="item.caDesc for item in tipoResolucion.availableOptions track by item.caDesc" readonly />
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Nro Resolucion</label> 
+							<input type="text"
+								class="form-control input-sm" id="viajeNumero" ng-model="viajeReg.nroResolucion" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Creacion</label> 
+							<input type="text" class="form-control input-sm" id="viajeFechaCreacion" ng-model="viajeReg.fcreacion" readonly/>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Estado Resolucion</label> 
+							<input type="text" class="form-control input-sm" id="viajeNumero" ng-model="viajeReg.eResolucion.nombre" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+								<label>Fecha Firma</label> 
+								<div class="input-group">
+								<input type="text" class="form-control input-sm" datepicker-popup="{{viaje.format}}" ng-model="viajeReg.fFirma" is-open="viaje.calendarioAbierto" datepicker-options="viaje.dateOptions" ng-required="true" close-text="Cerrar" readonly />
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="viaje.abrirCalendario($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Codigo Barra</label> 
+							<input type="text" class="form-control input-sm" id="viajeCodBarra"  ng-model="viajeReg.cBarra" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha cod Barra</label> 
+							<input type="text" class="form-control input-sm" id="viajeFcodBarra" ng-model="viajeReg.fcBarra" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Numero Oficio</label> 
+							<input type="text" class="form-control input-sm" id="viajeNroOficio" ng-model="viajeReg.nroOficio" readonly />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Documento</label> 
+							<input type="text" class="form-control input-sm" id="viajeNroOficio" ng-model="viajeReg.nroOficio" readonly />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label>Sumilla</label> 
+							<input type="date" class="form-control input-sm" id="viajeSumilla" ng-model="viajeReg.sumilla" readonly  />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo de Ampliaci&oacuten</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="tipoEvento.selectedOption" ng-options="item.caDesc for item in tipoEvento.availableOptions track by item.caDesc" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Sub tipo Ampliaci&oacuten</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="tipoEvento.selectedOption" ng-options="item.caDesc for item in tipoEvento.availableOptions track by item.caDesc" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Ampliaci&oacuten a</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="tipoEvento.selectedOption" ng-options="item.caDesc for item in tipoEvento.availableOptions track by item.caDesc" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha Inicio</label> 
+							<input type="text" class="form-control input-sm" id="viajeNroOficio" ng-model="viajeReg.nroOficio" readonly />
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Fiscalia a cargo</label> 
+							<input type="date" class="form-control input-sm" id="deFnaci" ng-model="viajeReg.evento" />
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Nro Caso </label> 
+							<input type="date" class="form-control input-sm" id="deFnaci" ng-model="viajeReg.ciudad" value="Paris"/>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Plazo (D&iacuteas)</label> 
+							<input type="date" class="form-control input-sm" id="deFnaci" ng-model="viajeReg.pais"  readonly value="Francia" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-6">
+							<label>Agraviado</label>
+							<select style="height: 30px;" class="form-control" name="deDatos" ng-model="detMantenedor.deDatos" ng-options="item.id  as item.name for item in datos" required>							
+							<option value="Fiorella Arteaga">Fiorella Arteaga</option>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Tipo de Delito</label> 
+							<select style="height: 30px;" class="form-control" name="idTipo" ng-model="tipoEvento.selectedOption" ng-options="item.caDesc for item in tipoEvento.availableOptions track by item.caDesc" required>
+							</select>
+						</div>
+						<div class="form-group col-xs-9 col-sm-6 col-md-3">
+							<label>Fecha vencimiento </label> 
+							<input type="date" class="form-control input-sm" id="deFnaci" ng-model="viajeReg.ciudad" value="Paris"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="widget-box">
+				<div class="widget-body">
+					<div class="widget-main">
+						<div class="row">
+							<div class="form-group col-xs-9 col-sm-6 col-md-6">
+								<label>Denunciado</label>
+								<select style="height: 30px;" class="form-control" name="deDatos" ng-model="detMantenedor.deDatos" ng-options="item.id  as item.name for item in datos" required>							
+								<option value="Fiorella Arteaga">Fiorella Arteaga</option>
+								</select>
+							</div>
+							<div class="form-group col-xs-9 col-sm-6 col-md-6">
+								<label>Responsable SG</label>
+								<select style="height: 30px;" class="form-control" name="deDatos" ng-model="detMantenedor.deDatos" ng-options="item.id  as item.name for item in datos" required>							
+								<option value="Fiorella Arteaga">Fiorella Arteaga</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-9 col-sm-6 col-md-12">
+							<label>Sumilla</label> 
+							<input type="date" class="form-control input-sm" id="viajeSumilla" ng-model="viajeReg.sumilla" readonly  />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<ul class="list-group" >
+			<li class="list-group-item  bloque-titulo">
+				<div class="pull-left"><h4>Fiscales</h4></div>
+				<div class="form-group col-xs-9 col-sm-6 col-md-2 pull-right">
+							
+				<button class="btn btn-primary btn-md form-control" ng-click="viaje.abriModalComisionado()"><span class="glyphicon glyphicon-plus"></span>Agregar</button>	
+							
+				</div>
+				<div class="clearfix"></div> 
+			</li>
+			<li class="list-group-item">
+				<table id="registrosINPE"  class="table table-condensed table-hover table-responsive" style="font-size:12px;cursor:pointer;">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido Paterno</th>
+							<th>Apellido Materno</th>
+							<th>Cargo</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Marcelita del Rosario</td>
+						<td>Guitierrez</td>
+						<td>Vallejo</td>
+						<td>Fiscal Provincial</td>
+					</tr>
+					<tr>
+						<td>Wendy</td>
+						<td>Calero</td>
+						<td>Espino</td>
+						<td>Fiscal Adjunto Provincial</td>
+					</tr>
+					<tr>
+						<td>Ketty</td>
+						<td>Garibay</td>
+						<td>Mascco</td>
+						<td>Fiscal Adjunto Provincial</td>
+					</tr>
+					<!--
+					
+					<tr>
+						<td>Avalos</td>
+						<td>Rivera</td>
+						<td>Zoraida</td>
+						<td>Cobertura Nacional</td>
+						<td>Si</td>
+						<td>Si</td>
+						<td>3,080.00</td>
+						<td>440.00</td>
+						<td></td>
+						<td>3,520.00</td>
+						<td></td>
+					</tr>
+					
+					
+					
+					<tr ng-class="{'selected':$index == selectedRowINPE}" ng-repeat="item2 in lstRegistrosInpeXPj"   ng-click="setearClicFilaINPE($index)"  ng-dblclick="" >  
+							 <td> {{ $index + 1 }}</td> 
+							<td>{{item2.iprId}}</td>
+							<td>{{item2.iprNroExp}}</td>
+							<td>{{item2.iprFechaIng}}</td> 
+							<td><button ng-click="actualizarRegistroINPE(item2.iprId,item2)"  class="btn btn-primary btn-xs">Actualizar</button>
+								<button ng-click="eliminarRegistroINPE(item2.iprId,item2)"  class="btn btn-danger btn-xs">Eliminar</button>
+							</td>
+						</tr>  -->
+						
+					</tbody>
+				</table>
+			</li>
+		</ul>
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-right">
+							<button class="btn btn-danger btn-md form-control" ng-click="registrarDatos()"><span class="glyphicon glyphicon-saved"></span>Guardar</button>	
+						</div>
+						<div class="form-group col-xs-6 col-sm-3 col-md-2 pull-left">
+							<button class="btn btn-success btn-md form-control" ng-click="viaje.regresar()"><span class="glyphicon glyphicon-log-out"></span>Regresar</button>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="modalComisionado.html">
+	<div class="include" ng-include="'vistas/resoluciones/viaje/modalComisionado.html'">
+	</div>
+</script>

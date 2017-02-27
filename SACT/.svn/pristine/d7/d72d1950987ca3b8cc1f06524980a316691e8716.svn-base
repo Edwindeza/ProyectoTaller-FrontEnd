@@ -1,0 +1,62 @@
+<div growl></div>
+<style>
+.panel-body{
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
+</style>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 align="center">DEPENDENCIAS EXTERNAS</h4>
+	</div>
+	<div class="panel-body">
+	<div class="col-md-10  col-md-offset-1"  >
+		<ul class="list-group" >
+			<li class="list-group-item  bloque-titulo">
+				<div class="pull-left"><h4>Lista Dependencias</h4></div>
+				<div class="form-group col-xs-9 col-sm-6 col-md-2 pull-right">
+					<button class="btn btn-primary btn-md form-control" ng-click="parametro.abriModalAgregar()"><span class="glyphicon glyphicon-plus"></span>Agregar</button>		
+				</div>
+				<div class="clearfix"></div> 
+			</li>
+			<li class="list-group-item">
+				<table id="tablaParametros"  class="table table-condensed table-hover table-responsive" style="font-size:12px;cursor:pointer;">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Telefono</th>
+							<th>Anexo</th>
+							<th>Representante</th>
+							<th>Direccion</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr ng-class="{'selected':$index == selectedRowINPE}" ng-repeat="item2 in listaDependencia.availableOptions">  
+							<td>{{item2.deId}}</td>
+							<td>{{item2.deNombre}}</td>
+							<td>{{item2.deTelefono}}</td>
+							<td>{{item2.deAnexo}}</td>
+							<td>{{item2.deRepresentante}}</td>
+							<td>{{item2.deObservacion}}</td>
+							<td>
+							<button ng-click="parametro.editar(listaTablaTipo.availableOptions,item2)"  class="btn btn-success btn-xs "><span class="glyphicon glyphicon-pencil"></span></button>
+							</td>
+							<td>
+							<button ng-click="parametro.eliminar(listaTablaTipo.availableOptions,item2)"  class="btn btn-danger btn-xs "><span class="glyphicon glyphicon-trash"></span></button>
+							</td>
+						</tr> 
+					</tbody>
+				</table>
+			</li>
+		</ul>
+	</div>
+</div>
+</div>	
+</body>
+</html>
+<script type="text/ng-template" id="modalDependencia.html">
+	<div class="include" ng-include="'vistas/resoluciones/parametro/modalDependencia.html'">
+	</div>
+</script>

@@ -1,0 +1,771 @@
+<div layout="row">
+	<div flex="66" flex-offset="15">
+		<div layout="column" ng-cloak class="md-inline-form"></div>
+		<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+			<div>
+				<h2 class="md-toolbar-tools">
+					<span>Buscar Tramite</span>
+				</h2>
+			</div>
+		</md-content>
+		<md-content class="md-padding">
+		    <form ng-submit="$event.preventDefault()">
+		      <p>Escriba el <code>Tramite</code> a solicitar.</p>
+		      <div angucomplete-alt id="ex9" pause="100"
+								selected-object="selectedTramite"
+								local-data="tramites" search-fields="nombre"
+								title-field="nombre" minlength="1"
+								input-class="form-control form-control-small"
+								match-class="highlight">
+			  </div>
+		      <br/>
+ 			</form>
+  		</md-content>
+  		<md-content class="page-container" ng-if="estadoTitulo==true">
+		      <md-card>
+				  <md-card-header>
+				    <md-card-avatar>
+				      <img class="md-user-avatar" src="recursos/img/fisi.PNG">
+				    </md-card-avatar>
+				    <md-card-header-text>
+				      <span class="md-title">Matricula</span>
+				      <span class="md-subhead">La matr&iacutecula es una relaci&oacuten contractual entre la Universidad y el alumno, renovable en cada periodo acad&eacutemico, mediante la cual se asumen derechos y obligaciones de acuerdo a lo que resuelve la Ley Universitaria, el Estatuto de la UNMSM y el Reglamento de Matr&iacutecula</span>
+				    </md-card-header-text>
+				  </md-card-header>
+				  <md-card-title>
+				    <md-card-title-text>
+				      <span class="md-headline">{{titulo}}</span>
+				     <!--  <span class="md-subhead">Requerimiento</span> -->
+				    </md-card-title-text>
+				  </md-card-title>
+				  
+				  <md-card-content layout="column" layout-align="start center" >
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato &Uacutenico de Tr&Aacutemite Documentario (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Carn&eacute</td>
+							<td style="text-align: center;"><p>S/. 12.50</p></td>
+							<td>201-302</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Autoseguro</td>
+							<td style="text-align: center;"><p>S/. 20.00</p></td>
+							<td>210-459</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Mantenimiento Laboratorio</td>
+							<td style="text-align: center;"><p>S/. 25.00</p></td>
+							<td>210-340</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de Constancia de Ingreso</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  
+				  <!-- MATRICULA REGULAR -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==2">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Carn&eacute</td>
+							<td style="text-align: center;"><p>S/. 12.50</p></td>
+							<td>201-302</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Autoseguro</td>
+							<td style="text-align: center;"><p>S/. 20.00</p></td>
+							<td>210-459</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Mantenimiento Laboratorio</td>
+							<td style="text-align: center;"><p>S/. 25.00</p></td>
+							<td>210-340</td>
+						</tr>
+						<tr>
+							<td>Constancia de no tener deudas económicas (Pagos por 2da. y/o 3ra. Repitencia)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Haber estado matriculado en el semestre inmediato anterior</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td> No estar incurso en deficiencia académica ( 4ta. Rept. observados)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- MATRICULA EXTEMPORANEA -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==3">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Carn&eacute</td>
+							<td style="text-align: center;"><p>S/. 12.50</p></td>
+							<td>201-302</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Autoseguro</td>
+							<td style="text-align: center;"><p>S/. 20.00</p></td>
+							<td>210-459</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago : Mantenimiento Laboratorio</td>
+							<td style="text-align: center;"><p>S/. 25.00</p></td>
+							<td>210-340</td>
+						</tr>
+						<tr>
+							<td>Constancia de no tener deudas económicas (Pagos por 2da. y/o 3ra. Repitencia)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td> Haber estado matriculado en el semestre inmediato anterior.</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>No estar incurso en deficiencia académica ( 4ta. Rept. observados)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Visto bueno del Director de su Escuela</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- RESERVA DE MATRICULA - ALUMNO REGULAR -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="tramiteSelected9.nombre == 'reserva de matricula'">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 67.00</p></td>
+							<td>210-004</td>
+						</tr>
+						<tr>
+							<td>Solicitud simple (Indicando el motivo de su retiro y el semestre)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td> Fotocopia de historial académico</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+
+				  <!-- RESERVA DE MATRICULA - ALUMNO INGRESANTE -->
+				  <md-card-content layout="column" layout-align="start center"  ng-if="tramiteSelected9.nombre == 'Matrícula de Ingresante' " >
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 67.00</p></td>
+							<td>210-004</td>
+						</tr>
+						<tr>
+							<td>Solicitud simple</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de Constancia de Ingreso</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- REACTUALIZACION DE MATRICULA -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==6">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 191.00</p></td>
+							<td>210-006</td>
+						</tr>
+						<tr>
+							<td> Solicitud simple (Indicando el motivo de su retiro y su semestre)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td> Documentos sustentatorios (Falencia económica y/o salud, por el periodo que dejó de estudiar)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de historial academico</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- RECTIFICACION DE MATRICULA -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="tramiteSelected9.nombre == 'Recficicacion de matricula' " >
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 36.00</p></td>
+							<td>210-003</td>
+						</tr>
+						<tr>
+							<td>Solicitud simple</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Visto bueno del Director de su Escuela</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- ANULACION DE MATRICULA -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==8">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 67.00</p></td>
+							<td>210-005</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de último reporte de matricula</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Documentos sustentatorios de acuerdo a R.R.Nº00467-R-12 d)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Visto bueno del Director de su Escuela</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- ANULACION DE INGRESO -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==9">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 67.00</p></td>
+							<td>210-005</td>
+						</tr>
+						<tr>
+							<td>Fotocopia simple de constancia de ingreso a EAPanterior</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Fotocopia simple de constancia de ingreso a EAPnueva</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CERTIFICADOS DE ESTUDIOS -->
+				   <!--
+				  <md-card-content layout="column" layout-align="start center" ng-if="tramiteSelected9.nombre == 'Certificado de estudios' ">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT) (Dirigido a Dirección Académica)
+</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de pago (por semestre académico)</td>
+							<td style="text-align: center;"><p>S/. 10.00</p></td>
+							<td>210-101</td>
+						</tr>
+						<tr>
+							<td> 04 fotos a color, tamaño carnet, con fondo blanco </td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content> -->
+				  <!-- REPORTE DE MATRICULA(DUPLICADO) -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==11">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 10.00</p></td>
+							<td>210-301</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONSTANCIA DE ORDEN DE MERITO -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==12">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)(Dirigido a la Dirección Académica)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 15.00</p></td>
+							<td>210-154</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- HISTORIAL ACADEMICO(RECORD ACADEMICO) -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==13">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 15.00</p></td>
+							<td>210-164</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONSTANCIA DE INGRESO(COPIA LEGALIZADA) -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==14">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 26.00</p></td>
+							<td>210-151</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONSTANCIA DE MATRICULA -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==15">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 26.00</p></td>
+							<td>210-152</td>
+						</tr>
+						<tr>
+							<td>Fotocopia simple de reporte de matricula
+</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+
+				  <!-- CONSTANCIA DE ESTUDIOS -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==16">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 15.00</p></td>
+							<td>210-153</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- ACTAS ADICIONALES -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==17">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago (por cada acta) </td>
+							<td style="text-align: center;"><p>S/. 26.00</p></td>
+							<td>210-106</td>
+						</tr>
+						<tr>
+							<td>Solicitud del docente (firmada)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Copia del DNI del docente</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Constancia de notas (con huella digital del docente)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONSTANCIA DE EGRESADO -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==18">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 26.00</p></td>
+							<td>210-155</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de historial académico</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONSTANCIA DE TRAMITE DE GRADO DE BACHILLER -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==19">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 15.00</p></td>
+							<td>210-156</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de historial académico</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONSTANCIA DE TRAMITE DE TITULO PROFESIONAL -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==20">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago</td>
+							<td style="text-align: center;"><p>S/. 15.00</p></td>
+							<td>210-156</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de Diploma de Grado de Bachiller</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <!-- CONVALIDACIONES POR ASIGNATURA -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==21">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago  (por asignatura)(El pago se realizará, luego de la evaluación del expediente) </td>
+							<td style="text-align: center;"><p>S/. 26.00</p></td>
+							<td>210-107</td>
+						</tr>
+						<tr>
+							<td>Solicitud simple</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Certificados de estudios originales</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Silabos legalizados (firmados y sellados)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de Record Académico</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de Constancia de Ingreso</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+
+			
+				  <!-- CARTA DE PRESENTACION -->
+				  <md-card-content layout="column" layout-align="start center" ng-if="requerimiento==22">
+				   <table class="table table-bordered table-striped">
+					<thead></thead>
+						<tbody>
+						<tr>
+							<td>REQUISITOS</td>
+							<td style="text-align: justify;"><p>COSTOS</p></td>
+							<td>CONCEPTO DE PAGO</td>
+						</tr>
+						<tr>
+							<td>Formato único de trámite (FUT)</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						<tr>
+							<td>Recibo de Pago (por cada acta) </td>
+							<td style="text-align: center;"><p>S/. 15.00</p></td>
+							<td>210-156</td>
+						</tr>
+						<tr>
+							<td>Fotocopia de historial académico</td>
+							<td style="text-align: center;"><p>.</p></td>
+							<td>.</td>
+						</tr>
+						</tbody>
+					</table>
+				  </md-card-content>
+				  <md-card-actions layout="row" layout-align="center center">
+				    <md-button class="md-raised md-primary" ng-click="ctrl.solicitarTramite()" >Solicitar Tramite</md-button>
+				  </md-card-actions>
+			</md-card>
+	  </md-content>
+	</div>
+</div>

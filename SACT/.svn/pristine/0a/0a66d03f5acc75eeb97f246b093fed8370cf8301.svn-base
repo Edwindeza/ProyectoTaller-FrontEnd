@@ -1,0 +1,233 @@
+	var appbase = angular.module('appbase', ['ui.bootstrap','ngRoute','satellizer']);
+	
+	appbase.config(function( $routeProvider){
+		
+		$routeProvider
+		.when('/login', {
+			templateUrl:'vistas/login.html',
+			controller: 'loginCtrl',
+			controllerAs: 'login'				
+		})
+		.when("/viajeExterior", {
+			templateUrl:"vistas/resoluciones/viaje/viajeExterior.html",
+			controller: "viajeCtrl",
+			controllerAs: "viaje"
+		})
+		.when("/viajeSeguimiento", {
+			templateUrl:"vistas/resoluciones/viaje/viajeSeguimiento.html",
+			controller: "viajeCtrl",
+			controllerAs: "viaje"
+		})
+		.when("/representante", {
+			templateUrl:"vistas/resoluciones/representante/repreMP.html",
+			controller: "representanteCtrl",
+			controllerAs: "repre"
+		})
+		.when("/representanteSeguimiento", {
+			templateUrl:"vistas/resoluciones/representante/representanteSeguimiento.html",
+			controller: "representanteCtrl",
+			controllerAs: "repre"
+		})
+		.when("/ampliacion", {
+			templateUrl:"vistas/resoluciones/ampliacion/ampliacion.html",
+			controller: "representanteCtrl",
+			controllerAs: "repre"
+		})
+		.when("/ampliacionSeguimiento", {
+			templateUrl:"vistas/resoluciones/ampliacion/ampliacionSeguimiento.html",
+			controller: "representanteCtrl",
+			controllerAs: "repre"
+		})
+		.when("/otro", {
+			templateUrl:"vistas/resoluciones/otro/otro.html",
+			controller: "representanteCtrl",
+			controllerAs: "repre"
+		})
+		.when("/consulta", {
+			templateUrl:"vistas/resoluciones/consulta.html",
+			controller: "consultaCtrl",
+			controllerAs: "consulta"
+		})
+		.when("/general", {
+			templateUrl:"vistas/resoluciones/parametro/general.html",
+			controller: "parametroCtrl",
+			controllerAs: "parametro"
+		})
+		.when("/dependencia", {
+			templateUrl:"vistas/resoluciones/parametro/dependencia.html",
+			controller: "dependenciaCtrl",
+			controllerAs: "parametro"
+		})
+		.when("/consultaDesignacion", {
+			templateUrl:"vistas/oficio/designacion/consultaDesignacion.html",
+			controller: "consultaDesignacionCtrl",
+			controllerAs: "consultaDesignacion"
+		})
+		.when("/registroDesignacion", {
+			templateUrl:"vistas/oficio/designacion/designacion.html",
+			controller: "designacionCtrl",
+			controllerAs: "designacion"
+		})
+		.otherwise({redirectTo: '/login'});
+	});
+	
+	
+	appbase.controller('globalCtrl', function( $scope, $rootScope, $auth, $location, $http, $filter) {
+		
+	});
+	
+	
+	appbase.service('directorioService', function($http, $rootScope){
+		return{
+			obtener:function(nombre){
+				return $http.get($rootScope.directorioRESTUrl + '/' + nombre).then(function(response){
+					var respuesta=response.data;
+					if(respuesta.estado=='OK'){
+						return respuesta.dato.url;
+					}else{
+						return '';
+					}
+				});
+			},
+		}
+	});
+	
+	appbase.run(function($auth, $rootScope, $location, $http, directorioService){
+		
+		$rootScope.listaTipo="http://localhost:8080/demobackend/resources/mantenedor/lista";
+		
+		$rootScope.consultaResoluciones="http://localhost:8080/demobackend/resources/resolucion/consultaResolucion";
+		$rootScope.listarTipoOrigen="http://localhost:8080/demobackend/resources/mantenedor/listarTipoOrigen";
+		$rootScope.listarTipoResolucion="http://localhost:8080/demobackend/resources/mantenedor/listarTipoResolucion";
+		$rootScope.listarTipoEvento="http://localhost:8080/demobackend/resources/mantenedor/listarTipoEvento";
+		$rootScope.listarTipoTransporte="http://localhost:8080/demobackend/resources/mantenedor/listarTipoTransporte";
+		$rootScope.listarTipoEstado="http://localhost:8080/demobackend/resources/mantenedor/listarTipoEstado";
+		$rootScope.listarFiscales="http://localhost:8080/demoseguridadbackend/resources/maestro/listaFiscales";
+
+//		$rootScope.udavitRESTUrl="http://localhost:8080/UCAVIT-RECURSOS/resources/carpetasfiscales/listado";
+//		$rootScope.udavitRESTUrlRecurso="http://localhost:8080/UCAVIT-RECURSOS/resources";
+//		$rootScope.udavitRESTUrl="http://localhost:8080/UCAVIT-V1/resources/aplicaciones/listado";
+//		$rootScope.udavitRESTUrlApp="http://localhost:8080/UCAVIT-V1/resources";
+//		$rootScope.udavitRESTUrl2="http://localhost:8080/UCAVIT-V1";
+//		$rootScope.udavitRESTUrl3="http://localhost:8080/UCAVIT-RECURSOS/resources/unidades/listado";
+//		$rootScope.udavitRESTUrl="http://172.16.48.3:8081/UCAVIT-V1/resources/aplicaciones/listado";
+//		$rootScope.udavitRESTUrl2="http://172.16.48.3:8081/UCAVIT-V1";
+//		$rootScope.udavitRESTUrl="http://sisucavit.mpfn.gob.pe:8081/UCAVIT-V1/resources/aplicaciones/listado";
+//		$rootScope.udavitRESTUrl2="http://sisucavit.mpfn.gob.pe:8081/UCAVIT-V1";
+//	
+		
+		
+		//$rootScope.udavitRESTUrl="http://localhost:8080/UCAVIT-V1/resources/aplicaciones/listado";
+		//$rootScope.udavitID="UDAVIT";
+		//	directorioService.obtener($rootScope.udavitID).then(function(url){
+		//	//$rootScope.udavitRESTUrl=url;
+		//	$rootScope.udavitRESTUrl="http://localhost:8080/UCAVIT-V1";
+		//});
+		
+		/**
+		 * Listar Tipos 
+		 */
+//		$rootScope.origen = {
+//			    availableOptions: [{caDetId:"", caDesc:""}],
+//			    selectedOption: {caDetId: '1', caDesc: 'SEGFN'} 
+//			    };
+//		$http.get($rootScope.listarTipoOrigen).then(function(response){
+//			$rootScope.origen.availableOptions = response.data;
+//		}, function(response){
+//			alert("error: "+response.data);
+//		});
+//		
+//		
+//		$rootScope.tipoResolucion = {
+//			    availableOptions: [{caDetId:"", caDesc:""}],
+//			    selectedOption: {caDetId: '1', caDesc: 'Viajes del Exterior'} 
+//			    };
+//		$http.get($rootScope.listarTipoResolucion).then(function(response){
+//			$rootScope.tipoResolucion.availableOptions = response.data;
+//		}, function(response){
+//			alert("error: "+response.data);
+//		});
+//		
+//		
+//		$rootScope.tipoEvento = {
+//			    availableOptions: [{caDetId:"", caDesc:""}],
+//			    selectedOption: {caDetId: '1', caDesc: 'Capacitación'} 
+//			    };
+//		$http.get($rootScope.listarTipoEvento).then(function(response){
+//			$rootScope.tipoEvento.availableOptions = response.data;
+//		}, function(response){
+//			alert("error: "+response.data);
+//		});
+//		
+//		
+//		$rootScope.tipoTransporte = {
+//			    availableOptions: [{caDetId:"", caDesc:""}],
+//			    selectedOption: {caDetId: '1', caDesc: 'Aéreo'} 
+//			    };
+//		$http.get($rootScope.listarTipoTransporte).then(function(response){
+//			$rootScope.tipoTransporte.availableOptions = response.data;
+//		}, function(response){
+//			alert("error: "+response.data);
+//		});
+//		
+//		$rootScope.tipoEstado = {
+//			    availableOptions: [{caDetId:"", caDesc:""}],
+//			    selectedOption: {caDetId: '1', caDesc: 'Proyecto'} 
+//			    };
+//		$http.get($rootScope.listarTipoEstado).then(function(response){
+//			$rootScope.tipoEstado.availableOptions = response.data;
+//		}, function(response){
+//			alert("error: "+response.data);
+//		});
+		
+		$rootScope.listaDistritoFiscal = {
+				availableOptions : [ {
+					codiDijuDju : "",
+					descDijuDju : ""
+				} ],
+				selectedOption:{
+					codiDijuDju : "0005",
+					descDijuDju : "DISTRITO FISCAL DE LIMA"}
+		};
+		$http.get("http://localhost:8080/demoseguridadbackend/resources/maestro/listaDF").then(function(response) {
+				$rootScope.listaDistritoFiscal.availableOptions = response.data;
+		}, function(response){
+			alert("error: " + response.data);
+		});
+		
+		$rootScope.tipoPropuesta = {
+				availableOptions : [ {
+					caDetId : "1",
+					caDesc : "Fiscal"
+				}, {
+					caDetId : "2",
+					caDesc : "Funcionario"
+				} ],
+				selectedOption : {
+					caDetId : '1',
+					caDesc : 'Fiscal'
+				}
+			};
+
+		$rootScope.estadoPropuesta = {
+				availableOptions : [ {
+					caDetId : "1",
+					caDesc : "Pendiente"
+				}, {
+					caDetId : "2",
+					caDesc : "Atendido"
+				} ],
+				selectedOption : {
+					caDetId : '1',
+					caDesc : 'Pendiente'
+				}
+			};
+		
+		
+		
+	});
+	
+	
+	
+
+	
