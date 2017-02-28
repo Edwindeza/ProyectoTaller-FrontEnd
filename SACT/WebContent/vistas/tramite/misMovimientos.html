@@ -40,13 +40,10 @@
 										style="font-size: 12px; cursor: pointer;">
 										<thead>
 											<tr>
-												<th>Nro Propuesta</th>
-												<th>Distrito Fiscal</th>
-												<th>Estado Propuesta</th>
-												<th>Numero Documento</th>
-												<th>Fecha Documento</th>
-												<th>C&oacutedigo Barra</th>
-												<th>Observaci&oacuten</th>
+												<th>Nro</th>
+												<th>Tramite</th>
+												<th>Usuario</th>
+												<th>Hoja de Ruta</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -55,10 +52,6 @@
 												<td>{{item.pdId}}</td>
 												<td>{{item.pdDisFiscal}}</td>
 												<td>{{item.pdEstProp}}</td>
-												<td>{{item.pdNroDocumento}}</td>
-												<td>{{item.pdFecDocumento}}</td>
-												<td>{{item.pdCodBarra}}</td>
-												<td>{{item.pdObs}}</td>
 												<td>
 													<button ng-click="consultaDesignacion.abriModalDesignacion(listaDesignacion,item.pdId)"
 														class="btn btn-primary btn-xs">Editar</button>

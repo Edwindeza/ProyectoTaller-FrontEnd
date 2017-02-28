@@ -1,3 +1,4 @@
+
 appbase.controller('solicitarTramiteCtrl',function($http, $modal, $rootScope,$scope,$timeout, $q, $log,$mdDialog,$window) {
 		
 				$scope.showHints = true;
@@ -85,8 +86,8 @@ var allStates='Expedito para optar Titulo Profesional,Expedito para optar el Gra
 				
 				this.solicitarTramite=function(){
 					console.log("entro a solicitar Tramite")
-					$http.post("http://138.197.17.11/api/solicitar-tramite/18/").then(function(response) {
-								
+					$http.post("http://138.197.17.11/api/user/32/solicitar-tramite/18/").then(function(response) {
+								growl.addErrorMessage("Solicitud correcta.");
 			}, function(response) {alert("error: " + response.data);});
 
 				}

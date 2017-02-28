@@ -50,7 +50,7 @@ appbase.controller('buscarTramiteCtrl',function(buscarTramiteService,$http, $mod
 
 			
 			this.solicitarTramite=function(){
-				$window.location.href = '#/solicitarTramite'
+				$window.location.href = 'http://138.197.17.11/web/solicitar-tramite/(?P<id>\d+)/'
 			}
 			
 			
