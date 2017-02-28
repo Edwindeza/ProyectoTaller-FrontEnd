@@ -37,6 +37,7 @@ appbase.controller('buscarTramiteCtrl',function(buscarTramiteService,$http, $mod
 					//			 }
 			});
 
+			 
 
 			$http.get("http://138.197.17.11/api/tramites/").then(function(response) {
 								JSON.stringify(response.data);
@@ -50,7 +51,7 @@ appbase.controller('buscarTramiteCtrl',function(buscarTramiteService,$http, $mod
 
 			
 			this.solicitarTramite=function(){
-				$window.location.href = 'http://138.197.17.11/web/solicitar-tramite/(?P<id>\d+)/'
+				$window.location.href = '#/solicitarTramite'
 			}
 			
 			

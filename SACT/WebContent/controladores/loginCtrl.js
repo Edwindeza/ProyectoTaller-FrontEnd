@@ -19,11 +19,15 @@ appbase.controller('loginCtrl', function($http,$modal,$log,$rootScope,$scope,gro
 	 
 	 $rootScope.toke="";
 
+	 $rootScope.token='';
+	 $rootScope.idUsuario='';
+
 	 this.login=function(){
 		  var datoLogin = JSON.stringify($scope.datos);
 		  $http.post("http://138.197.17.11/api/login/",datoLogin).then(function(response){
-		  		$rootScope.token=response.data;
-		  		console.log($rootScope.token)
+		  		$rootScope.token=response.data.token;
+		  		$rootScope.idUsuario=response.data.id;
+		  		console.log($rootScope.idUsuario)
 			    growl.addErrorMessage("Login Correcto.");
 				$rootScope.validarMenu=true;
 				$rootScope.windowLogin=false;

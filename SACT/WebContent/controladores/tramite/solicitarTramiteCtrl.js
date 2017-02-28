@@ -1,5 +1,15 @@
+appbase.service('solicitarTramiteService', function($http, $rootScope,$scope) {
+	return {
 
-appbase.controller('solicitarTramiteCtrl',function($http, $modal, $rootScope,$scope,$timeout, $q, $log,$mdDialog,$window) {
+		solicitarTramite:function(idUsuario,idTramite){
+				return $http.post("http://138.197.17.11/api/user/"+$rootScope.idUsuario+"/solicitar-tramite/"+$scope.idTramite+"/").then(function(response){
+					return response.data;
+				});
+			},
+		
+	}
+});
+appbase.controller('solicitarTramiteCtrl',function($http, $modal, $rootScope,$scope,$timeout, $q, $log,$mdDialog,$window,growl,$timeout) {
 		
 				$scope.showHints = true;
 				this.myDate = new Date();
@@ -83,12 +93,27 @@ var allStates='Expedito para optar Titulo Profesional,Expedito para optar el Gra
 					};
 			
 				}
+
+				$scope.idTramite=18;
 				
 				this.solicitarTramite=function(){
-					console.log("entro a solicitar Tramite")
-					$http.post("http://138.197.17.11/api/user/32/solicitar-tramite/18/").then(function(response) {
-								growl.addErrorMessage("Solicitud correcta.");
-			}, function(response) {alert("error: " + response.data);});
+					console.log($rootScope.idUsuario);
+
+					$http.post("http://138.197.17.11/api/user/"+$rootScope.idUsuario+"/solicitar-tramite/"+$scope.idTramite+"/").then(function(response) {
+								
+								$timeout(function () {
+							        growl.addErrorMessage("Solicitud correcta.");
+							    }, 5000);
+								
+								$window.location.href = '#/buscarTramite'
+					}, function(response) {alert("error: " + response.data);});
+
+
+					//solicitarTramiteService.solicitarTramite($rootScope.idUsuario,$scope.idTramite).then(function(respuesta) {
+					//				growl.addErrorMessage("Solicitud correcta.");
+					//			}, function(response) {
+					//				alert("error: " + response);
+					//			});
 
 				}
 				
