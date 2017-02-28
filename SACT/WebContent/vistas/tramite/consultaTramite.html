@@ -8,6 +8,19 @@
 				</h2>
 			</div>
 		</md-content>
+		<md-content class="md-padding">
+		    <form ng-submit="$event.preventDefault()">
+		      <p>Escriba el <code>Tramite</code> a consultar.</p>
+		      <div angucomplete-alt id="ex9" pause="100"
+								selected-object="selectedTramite"
+								local-data="tramites" search-fields="nombre"
+								title-field="nombre" minlength="1"
+								input-class="form-control form-control-small"
+								match-class="highlight">
+			  </div>
+		      <br/>
+ 			</form>
+  		</md-content>
 		<md-list >
 		  <md-subheader class="md-no-sticky">Lista de Tramites</md-subheader>
 		  <md-list-item ng-repeat="tramite in tramite" ng-click="goToPerson(tramite,$event)" class="noright">

@@ -1,12 +1,16 @@
 appbase.service('consultaTramiteService', function($http, $rootScope) {
 	return {
-
+			listarTramite:function(){
+				return $http.get("http://138.197.17.11/api/tramites/").then(function(response){
+					return response;
+				});
+			},
 		
 		
 	}
 });
 
-		appbase.controller('consultaTramiteCtrl', function(consultaTramiteService,$http, $modal, $rootScope, $scope,$timeout,$mdDialog) {
+appbase.controller('consultaTramiteCtrl', function(consultaTramiteService,$http, $modal, $rootScope, $scope,$timeout,$mdDialog,growl) {
 					var self = this;
 					
 					$scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS '
@@ -17,18 +21,6 @@ appbase.service('consultaTramiteService', function($http, $rootScope) {
 						};
 					});
 					
-//					    $scope.tramite = null;
-//						$scope.tramites = null;
-//						$scope.loadTramites = function() {
-//						    return $timeout(function() {
-//						      $scope.tramites =  $scope.tramites  || [
-//						        { id: 1, name: 'Matricula' },
-//						        { id: 2, name: 'Registros Académicos' },
-//						        { id: 3, name: 'Grados y Títulos' },
-//						        { id: 4, name: 'Prácticas Profesionales' }
-//						      ];
-//						    }, 350);
-//						  };
 						  
 						  $scope.tramite=[
 							    {name: 'Matricula de Ingresante', tipo: 'Matricula', 
@@ -94,18 +86,25 @@ appbase.service('consultaTramiteService', function($http, $rootScope) {
 							        .targetEvent(event)
 							    );
 							  };
-	  
-							
+	 
+
+							$rootScope.listaTramite4=[];
+	  						$scope.tramites=[];
+							consultaTramiteService.listarTramite().then(function(respuesta){
+								JSON.stringify(respuesta.data);
+								$rootScope.listaTramite4.push(respuesta.data);
+								for(var i=0;i<$rootScope.listaTramite4.length;i++){
+									for(var j=0;j<$rootScope.listaTramite4[i].results.length;j++){
+										$scope.tramites.push($rootScope.listaTramite4[i].results[j]);
+										console.log($scope.tramites)
+									}
+								 }
+							});
+
 						  
 			
 		
 		});
-
-appbase.controller('requerimientoModalCtrl', function($modalInstance, $modal, $rootScope, $scope,$http) {
-	
-	
-});
-
 
 
 

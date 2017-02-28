@@ -1,15 +1,16 @@
-appbase.service('solicitarTramiteService', function($http, $rootScope,$scope) {
+appbase.service('solicitarTramiteService', function($http, $rootScope) {
 	return {
-
-		solicitarTramite:function(idUsuario,idTramite){
-				return $http.post("http://138.197.17.11/api/user/"+$rootScope.idUsuario+"/solicitar-tramite/"+$scope.idTramite+"/").then(function(response){
-					return response.data;
+			solicitarTramite:function(idUsuario,idTramite){
+				return $http.post("http://138.197.17.11/api/user/"+idUsuario+"/solicitar-tramite/"+idTramite+"/").then(function(response){
+					return response;
 				});
 			},
 		
+		
 	}
 });
-appbase.controller('solicitarTramiteCtrl',function($http, $modal, $rootScope,$scope,$timeout, $q, $log,$mdDialog,$window,growl,$timeout) {
+
+appbase.controller('solicitarTramiteCtrl',function(solicitarTramiteService,$http, $modal, $rootScope,$scope,$timeout, $q, $log,$mdDialog,$window,growl,$timeout) {
 		
 				$scope.showHints = true;
 				this.myDate = new Date();
@@ -94,26 +95,18 @@ var allStates='Expedito para optar Titulo Profesional,Expedito para optar el Gra
 			
 				}
 
-				$scope.idTramite=18;
-				
-				this.solicitarTramite=function(){
+					$scope.idTramite=18;
+				    this.solicitarTramite=function(){
 					console.log($rootScope.idUsuario);
 
-					$http.post("http://138.197.17.11/api/user/"+$rootScope.idUsuario+"/solicitar-tramite/"+$scope.idTramite+"/").then(function(response) {
-								
+					solicitarTramiteService.solicitarTramite($rootScope.idUsuario,$scope.idTramite).then(function(respuesta){
 								$timeout(function () {
 							        growl.addErrorMessage("Solicitud correcta.");
-							    }, 5000);
-								
-								$window.location.href = '#/buscarTramite'
-					}, function(response) {alert("error: " + response.data);});
+							        
+							    }, 500);
+									$window.location.href = '#/buscarTramite'
+							});
 
-
-					//solicitarTramiteService.solicitarTramite($rootScope.idUsuario,$scope.idTramite).then(function(respuesta) {
-					//				growl.addErrorMessage("Solicitud correcta.");
-					//			}, function(response) {
-					//				alert("error: " + response);
-					//			});
 
 				}
 				

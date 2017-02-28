@@ -97,7 +97,8 @@
 			<md-icon md-svg-icon="call:chat"></md-icon> </md-toolbar-filler>
 			<div>
 				<h2 class="md-toolbar-tools">UNMSM-FISI</h2>
-				<md-menu-bar> 
+				<md-menu-bar>
+					<!--
 					<md-menu>
 					<button ng-click="$mdOpenMenu()">Gestion Tramite</button>
 							<md-menu-content> 
@@ -119,10 +120,10 @@
 											</md-menu-content> 
 									</md-menu> 
 								</md-menu-item> 
-								<!-- <md-menu-item> 
+								 <md-menu-item> 
 									<md-button ng-click="ctrl.sampleAction('BuscarTramite', $event)"> Busca Tramite<span class="md-alt-text"> {{ 'M-O' | keyboardShortcut }}</span> </md-button> 
-								</md-menu-item>  -->
-								<!--
+								</md-menu-item
+								
 								<md-menu-item>
 									<md-button disabled="disabled" ng-click="ctrl.sampleAction('Rename', $event)"> Rename </md-button> 
 								</md-menu-item> 
@@ -130,9 +131,10 @@
 								<md-menu-item>
 									<md-button ng-click="ctrl.sampleAction('Print', $event)"> Print <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span> </md-button> 
 								</md-menu-item>
-								--> 
+								
 							</md-menu-content> 
 					</md-menu>
+					-->
 					<md-menu>
 					<button ng-click="$mdOpenMenu()">Tramite</button>
 						<md-menu-content> 
@@ -151,7 +153,7 @@
 					<md-menu>
 					<button ng-click="$mdOpenMenu()">Mantenimiento</button>
 						<md-menu-content> 
-							<md-menu-item type="checkbox" ng-click="ctrl.sampleAction('nuevoUsuario', $event)">Nuevo Usuario</md-menu-item> 
+							<md-menu-item type="checkbox" ng-click="ctrl.sampleAction('nuevoUsuario', $event)">Registar Usuario</md-menu-item> 
 							<!--<md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler </md-menu-item> 
 							<md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar </md-menu-item> 
 							<md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions </md-menu-item> 

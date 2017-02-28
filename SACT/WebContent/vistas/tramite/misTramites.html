@@ -26,6 +26,23 @@
 				      <span class="md-subhead">Facultad de Ingenieria de Sistema e Informatica</span>
 				    </md-card-title-text>
 				  </md-card-title>
+				  <md-card-title>
+				    <md-card-title-text>
+				     	<md-content class="md-padding">
+						    <form ng-submit="$event.preventDefault()">
+						      <p>Escriba el <code>Tramite</code> a verificar.</p>
+						      <div angucomplete-alt id="ex9" pause="100"
+												selected-object="selectedTramite"
+												local-data="tramites" search-fields="nombre"
+												title-field="nombre" minlength="1"
+												input-class="form-control form-control-small"
+												match-class="highlight">
+							  </div>
+						      <br/>
+				 			</form>
+				  		</md-content>
+				    </md-card-title-text>
+				  </md-card-title
 				  <md-card-content layout="column">
 							<ul class="list-group">
 								<li class="list-group-item-info  bloque-titulo">
@@ -43,23 +60,19 @@
 												<th>Nro Tramite</th>
 												<th>Codigo</th>
 												<th>Estado</th>
-												<th>Usuario</th>
-												<th>Tramite</th>
 												<th>Oficina</th>
+												<th>Usuario</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr ng-repeat="item in listaDesignacion" ng-if="listaDesignacion.length > 0">
-												<td>{{item.pdId}}</td>
-												<td>{{item.pdDisFiscal}}</td>
-												<td>{{item.pdEstProp}}</td>
-												<td>{{item.pdNroDocumento}}</td>
-												<td>{{item.pdFecDocumento}}</td>
-												<td>{{item.pdCodBarra}}</td>
-												<td>{{item.pdObs}}</td>
+											<tr ng-repeat="item in listaTramites" >
+												<td>{{item.id}}</td>
+												<td>{{item.codigo}}</td>
+												<td>{{item.estado}}</td>
+												<td >{{item.oficina}}</td>
+												<td>{{item.usuario}}</td>
 												<td>
-													<button ng-click="consultaDesignacion.abriModalDesignacion(listaDesignacion,item.pdId)"
-														class="btn btn-primary btn-xs">Editar</button>
+													<button ng-click="ctrl.cancelarTramite(listaTramites,item)" class="btn btn-primary btn-xs">Cancelar</button>
 												</td>
 											</tr>
 										</tbody>
@@ -67,9 +80,11 @@
 								</li>
 							</ul>
 				  </md-card-content>
+				  <!--
 				  <md-card-actions layout="row" layout-align="center center">
 				    <md-button class="md-raised md-primary" ng-click="ctrl.solicitarTramite()" >Guardar</md-button>
 				  </md-card-actions>
+					-->
 			</md-card>
 		</md-content>
 	</div>
