@@ -1,13 +1,3 @@
-//appbase.service('loginService', function($http, $rootScope,$scope){
-//		return{
-//			login:function(datos){
-//				return $http.post("http://138.197.17.11/api/login/",datos).then(function(response){
-//					return response.data;
-//				});
-//			}
-//		}
-//	});
-	
 appbase.controller('loginCtrl', function($http,$modal,$log,$rootScope,$scope,growl){
 	 	 
 	 $scope.datos={email:"fernando.supo6@gmail.com",password:"fsupo"}

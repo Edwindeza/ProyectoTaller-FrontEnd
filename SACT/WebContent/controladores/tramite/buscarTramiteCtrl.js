@@ -1,18 +1,4 @@
-appbase.service('buscarTramiteService', function($http, $rootScope) {
-	return {
-
-		listarTramite:function(){
-				return $http.get("http://138.197.17.11/api/tramites/").then(function(response){
-					return response;
-				});
-			},
-		
-	}
-});
-
 appbase.controller('buscarTramiteCtrl',function(buscarTramiteService,$http, $modal, $rootScope,$scope,$timeout, $q, $log,$mdDialog,$window,growl) {
-
-			
 	 		$rootScope.listaTramite=[];
 			$scope.tramites=[];
 			

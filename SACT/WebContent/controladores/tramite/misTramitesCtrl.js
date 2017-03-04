@@ -1,28 +1,3 @@
-
-appbase.service('misTramitesService', function($http, $rootScope) {
-	return {
-
-			listarTramite:function(){
-					return $http.get("http://138.197.17.11/api/tramites/").then(function(response){
-						return response;
-					});
-				},
-
-			listarTramitesUsuario:function(idUsuario){
-				return $http.get("http://138.197.17.11/api/mis-tramites/"+idUsuario+"/").then(function(response){
-					return response;
-				});
-			},
-
-			cancelarTramite:function(idTramite){
-				return $http.put("http://138.197.17.11/api/cancelar-tramite/"+idTramite+"/").then(function(response){
-					return response;
-				});
-			},
-		
-	}
-});
-
 appbase.controller('misTramitesCtrl',function(misTramitesService,$http, $modal, $rootScope,$scope, $filter,growl) {
 
 
@@ -65,45 +40,3 @@ appbase.controller('misTramitesCtrl',function(misTramitesService,$http, $modal, 
 
 
 });
-
-appbase.controller('designacionModalCtrl', function($modalInstance, $modal, $rootScope, $scope,$http) {
-	var entorno2 = $scope;
-	
-	$rootScope.mPropuesta = {
-			pdId : "",
-			pdTipProp : "",
-			pdEstProp : "",
-			pdDisFiscal :"",
-			pdCodBarra : "",
-			pdNroDocumento : "",
-			pdFecDocumento : "",
-			pdSumilla : "",
-			pdObs : ""
-		};
-	
-		this.consultaDocumento = function(mPropuesta) {
-			$http.get("http://localhost:8080/demoseguridadbackend/resources/mantenedor/"+$rootScope.mPropuesta[0].pdCodBarra).then(function(response){
-				$rootScope.listaCodigoBarra.availableOptions = response.data;
-				console.log($rootScope.listaCodigoBarra);
-			}, function(response){
-				alert("error: "+response.data);
-			});
-		}
-	
-		$scope.cDesignacion.tipoPropuesta = {
-			availableOptions : [ {
-				caDetId : "1",
-				caDesc : "Fiscal"
-			}, {
-				caDetId : "2",
-				caDesc : "Funcionario"
-			} ],
-			selectedOption : {
-				caDetId : $rootScope.mPropuesta.pdTipProp,
-				caDesc : ''
-			}
-		};
-
-
-});
-

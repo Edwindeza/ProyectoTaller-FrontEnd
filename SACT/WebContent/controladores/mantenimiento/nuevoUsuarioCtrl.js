@@ -1,4 +1,4 @@
-appbase.controller('nuevoUsuarioCtrl',function($http, $modal, $rootScope,$scope,growl) {
+appbase.controller('nuevoUsuarioCtrl',function(usuarioService,$http, $modal, $rootScope,$scope,growl) {
 		
 		$scope.user={
 				email:"",
@@ -12,7 +12,8 @@ appbase.controller('nuevoUsuarioCtrl',function($http, $modal, $rootScope,$scope,
 	
 		this.AgregarUsuario=function(){
 			var usuario = JSON.stringify($scope.user);
-			$http.post("http://138.197.17.11/api/create-user/",usuario).then(function(response){
+			
+			usuarioService.registrarUsuario(usuario).then(function(respuesta){
 				JSON.stringify(response.data);
 			    growl.addErrorMessage("Usuario registrado correctamente."+response.data);
 			    $scope.user.length=0;
@@ -23,6 +24,7 @@ appbase.controller('nuevoUsuarioCtrl',function($http, $modal, $rootScope,$scope,
 				}
 				growl.addErrorMessage("Error de registro de usuario,");
 			});
+			
 		}
 	});
 		

@@ -54,20 +54,7 @@
 
 <script src="componentes/angular-table/md-data-table.min.js"></script>
 
-
-
-
-
-
 <script src="appbase.js"></script>
-<script src="controladores/loginCtrl.js"></script>
-<script src="controladores/resoluciones/viajeCtrl.js"></script>
-<script src="controladores/resoluciones/consultaCtrl.js"></script>
-<script src="controladores/resoluciones/representanteCtrl.js"></script>
-<script src="controladores/resoluciones/parametro/parametroCtrl.js"></script>
-<script src="controladores/resoluciones/parametro/dependenciaCtrl.js"></script>
-<script src="controladores/oficio/designacion/designacionCtrl.js"></script>
-<script src="controladores/oficio/designacion/consultaDesignacionCtrl.js"></script>
 <script src="controladores/tramite/tramiteCtrl.js"></script>
 <script src="controladores/tramite/consultaTramiteCtrl.js"></script>
 <script src="controladores/tramite/buscarTramiteCtrl.js"></script>
@@ -75,15 +62,22 @@
 <script src="controladores/tramite/misTramitesCtrl.js"></script>
 <script src="controladores/tramite/misMovimientosCtrl.js"></script>
 <script src="controladores/mantenimiento/nuevoUsuarioCtrl.js"></script>
+<script src="controladores/tramite/loginCtrl.js"></script>
+<script src="controladores/menuCtrl.js"></script>
 
+<script src="servicios/consultaTramiteService.js"></script>
+<script src="servicios/buscarTramiteService.js"></script>
+<script src="servicios/solicitarTramiteService.js"></script>
+<script src="servicios/misTramitesService.js"></script>
+<script src="servicios/loginService.js"></script>
+<script src="servicios/usuarioService.js"></script>
 
-<script src="controladores/DemoCtrl.js"></script>
 
 
 </head>
 
 <body ng-controller='globalCtrl'>
-	<div ng-controller="DemoCtrl as ctrl" ng-cloak>
+	<div ng-controller="menuCtrl as ctrl" ng-cloak>
 		<md-content id="md-content-Principal" md-theme="docs-dark" layout-gt-sm="row" layout-align="center center" layout-padding>
 				<div>
 					<h2 class="md-toolbar-tools">

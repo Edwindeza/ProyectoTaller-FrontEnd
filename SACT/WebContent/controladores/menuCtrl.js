@@ -1,4 +1,4 @@
-appbase.controller('DemoCtrl', function($timeout, $q, $log, $scope, $mdDialog,$window,$rootScope) {
+appbase.controller('menuCtrl', function($timeout, $q, $log, $scope, $mdDialog,$window,$rootScope) {
 					
 					$rootScope.validarMenu=false;
 	

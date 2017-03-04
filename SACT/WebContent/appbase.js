@@ -17,11 +17,6 @@
 		
 		
 		$routeProvider
-		.when('/tramite', {
-			templateUrl:'vistas/tramite/tramite.html',
-			controller: 'tramiteCtrl',
-			controllerAs: 'ctrl'				
-		})
 		.when('/consultaTramite', {
 			templateUrl:'vistas/tramite/consultaTramite.html',
 			controller: 'consultaTramiteCtrl',
@@ -72,6 +67,9 @@
 	
 	appbase.controller('globalCtrl', function( $scope, $rootScope, $auth, $location, $http, $filter,$mdDialog) {
 		$scope.validar=true;
+		$rootScope.urlServidor="http://138.197.17.11/api/";
+		
+		
 	});
 	
 	
